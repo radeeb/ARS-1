@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, ForeignKey, Integer, String, Float, DateTime
 
@@ -22,19 +22,13 @@ class Ad_Location_Visit(Base):
 	active_ratio = Column(Float)
 	total_spent = Column(Float)
 	page_id = Column(Integer, ForeignKey("page.id"))
-	created_at = Column(DateTime)
+	created_at = Column(DateTime, default=func.now())
 
-class Keyword(Base):
-	__tablename__ = "keyword"
+class Page_Keyword(Base):
+	__tablename__ = "page_keyword"
 
-	id = Column(Integer, primary_key=True, nullable=False)
-	keyword_name = Column(String)
-
-class Page_Keywords(Base):
-	__tablename__ = "page_keywords"
-
-	keywords = Column(Integer, ForeignKey("keyword.id"), primary_key=True)
-	page = Column(Integer, ForeignKey("page.id"), primary_key=True)
+	keyword = Column(String, primary_key=True)
+	page_id = Column(Integer, ForeignKey("page.id"), primary_key=True)
 
 # Create an engine that stores data in the local directory's
 # "database.db" file.
