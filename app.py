@@ -13,6 +13,13 @@ def yahoo():
 	#get the yahoo site
 	site = "index.html"
 	return render_template(site)
+
+@app.route("/report" , methods=["GET"])
+def report():
+	#get the yahoo site
+	site = "report.html"
+	return render_template(site)
+
 #------------------------------------------------------------------------------
 
 #--------------------------------Functions/Classes-----------------------------

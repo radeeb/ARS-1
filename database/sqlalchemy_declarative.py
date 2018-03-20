@@ -29,6 +29,7 @@ class Page_Keyword(Base):
 
 	keyword = Column(String, primary_key=True)
 	page_id = Column(Integer, ForeignKey("page.id"), primary_key=True)
+	value = Column(Float)
 
 # Create an engine that stores data in the local directory's
 # "database.db" file.
