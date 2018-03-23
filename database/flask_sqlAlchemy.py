@@ -16,7 +16,7 @@ class Page(Base.Model):
 
 class WebsiteVisits(Base.Model):
     visitID = Base.Column(Base.Integer, primary_key=True)
-    url = Base.Column(Base.String(100), Base.ForeignKey('page.url'),)
+    url = Base.Column(Base.String(100), Base.ForeignKey('page.url'))
     keywords = Base.Column(Base.Text)
     activeRatio = Base.Column(Base.Float)
     focusRatio = Base.Column(Base.Float)
