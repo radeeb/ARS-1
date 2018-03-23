@@ -1,7 +1,7 @@
 #--------------------------------Imports---------------------------------------
-from flask import Flask, render_template
+from flask import Flask, render_template, request, abort, url_for
 from database.flask_sqlAlchemy import *
-import requests, os
+import requests, os, json
 #------------------------------------------------------------------------------
 
 #--------------------------------Application setup-----------------------------
@@ -21,23 +21,31 @@ Base.create_all()
 DB = Database(Base)
 
 #add a page for testing DELETE ME
-print("DB setup")
 #DB.insert_page("yahoo.com", ['sports', 'money'], [1,5,8])
 #======================DELETE ME=========================
 #------------------------------------------------------------------------------
 
 #--------------------------------Web Interface---------------------------------
+
+#INDEX PAGE OF APP
 @app.route("/" , methods=["GET"])
 def index():
 	site = "index.html"
 	return render_template(site)
 
+#route for our local news website
+@app.route("/news" , methods=["GET"])
+def viewNews():
+	site = "news.html"
+	return render_template(site)
+
 @app.route("/visit", methods=["POST"])
 def visit():
 	response = "You visited an ARS website!"
-	data = request.data
-	print(data)
-	#push the visit to the database
+	#load the data then put in database
+	data = json.loads(request.data)
+	DB.insert_webpage_visit(data["url"], data["keywords"], data["activeRatio"], data["focusRatio"])
+	print("Visit successfully recorded in database")
 	return response
 
 @app.route("/report", methods=["GET"])
@@ -55,4 +63,3 @@ def report():
 if(__name__ == "__main__"):
 	app.run(host="0.0.0.0" , port= localPort)
 #------------------------------------------------------------------------------
-

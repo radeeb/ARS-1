@@ -6,12 +6,13 @@
     <title>The News Reporter</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="fonts/font.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/responsive.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/jquery.bxslider.css" media="screen" />
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/responsive.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.bxslider.css') }}">
 
     <!--Global site tag for google analytics-->
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -24,12 +25,10 @@
         gtag('config', 'UA-19410358-6');
     </script>
 
-    <script type="text/javascript" src="js/jquery-min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.bxslider.js"></script>
-
-    <!--Riveted function call-->
-    <script src="js/activeRivetedJson.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.bxslider.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/riveted.js') }}"></script>
 
     <!--call Riveted function-->
     <script>
@@ -43,7 +42,7 @@
 <div class="body_wrapper">
   <div class="center">
     <div class="header_area">
-      <div class="logo floatleft"><a href="#"><img src="images/logo.png" alt="" /></a></div>
+      <div class="logo floatleft"><a href="#"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></a></div>
       <div class="top_menu floatleft">
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -135,9 +134,9 @@
     <div class="slider_area">
       <div class="slider">
         <ul class="bxslider">
-          <li><img src="images/1.jpg" alt="" title="Slider caption text" /></li>
-          <li><img src="images/2.jpg" alt="" title="Slider caption text" /></li>
-          <li><img src="images/3.jpg" alt="" title="Slider caption text" /></li>
+          <li><img src=""{{ url_for('static', filename='images/1.jpg') }}"" alt="" title="Slider caption text" /></li>
+          <li><img src=""{{ url_for('static', filename='images/2.jpg') }}"" alt="" title="Slider caption text" /></li>
+          <li><img src=""{{ url_for('static', filename='images/3.jpg') }}"" alt="" title="Slider caption text" /></li>
         </ul>
       </div>
     </div>
@@ -147,17 +146,17 @@
           <div class="single_left_coloum_wrapper">
             <h2 class="title">from   around   the   world</h2>
             <a class="more" href="#">more</a>
-            <div class="single_left_coloum floatleft"> <img src="images/single_featured.png" alt="" />
+            <div class="single_left_coloum floatleft"> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" />
               <h3>Lorem ipsum dolor sit amet, consectetur</h3>
               <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper
                 dolor eu mattis.</p>
               <a class="readmore" href="#">read more</a> </div>
-            <div class="single_left_coloum floatleft"> <img src="images/single_featured.png" alt="" />
+            <div class="single_left_coloum floatleft"> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" />
               <h3>Lorem ipsum dolor sit amet, consectetur</h3>
               <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper
                 dolor eu mattis.</p>
               <a class="readmore" href="#">read more</a> </div>
-            <div class="single_left_coloum floatleft"> <img src="images/single_featured.png" alt="" />
+            <div class="single_left_coloum floatleft"> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" />
               <h3>Lorem ipsum dolor sit amet, consectetur</h3>
               <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper
                 dolor eu mattis.</p>
@@ -166,17 +165,17 @@
           <div class="single_left_coloum_wrapper">
             <h2 class="title">latest  articles</h2>
             <a class="more" href="#">more</a>
-            <div class="single_left_coloum floatleft"> <img src="images/single_featured.png" alt="" />
+            <div class="single_left_coloum floatleft"> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" />
               <h3>Lorem ipsum dolor sit amet, consectetur</h3>
               <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper
                 dolor eu mattis.</p>
               <a class="readmore" href="#">read more</a> </div>
-            <div class="single_left_coloum floatleft"> <img src="images/single_featured.png" alt="" />
+            <div class="single_left_coloum floatleft"> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" />
               <h3>Lorem ipsum dolor sit amet, consectetur</h3>
               <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper
                 dolor eu mattis.</p>
               <a class="readmore" href="#">read more</a> </div>
-            <div class="single_left_coloum floatleft"> <img src="images/single_featured.png" alt="" />
+            <div class="single_left_coloum floatleft"> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" />
               <h3>Lorem ipsum dolor sit amet, consectetur</h3>
               <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper
                 dolor eu mattis.</p>
@@ -184,7 +183,7 @@
           </div>
           <div class="single_left_coloum_wrapper gallery">
             <h2 class="title">gallery</h2>
-            <a class="more" href="#">more</a> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> <img src="images/single_featured.png" alt="" /> </div>
+            <a class="more" href="#">more</a> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" /> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" /> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" /> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" /> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" /> <img src="{{ url_for('static', filename='images/single_featured.png') }}" alt="" /> </div>
           <div class="single_left_coloum_wrapper single_cat_left">
             <h2 class="title">tech news</h2>
             <a class="more" href="#">more</a>
@@ -239,23 +238,23 @@
             <a class="popular_more" href="#">more</a> </div>
           <div class="single_right_coloum">
             <h2 class="title">editorial</h2>
-            <div class="single_cat_right_content editorial"> <img src="images/editorial_img.png" alt="" />
+            <div class="single_cat_right_content editorial"> <img src="{{ url_for('static', filename='images/editorial_img.png') }}" alt="" />
               <h3>Lorem ipsum dolor sit amet con se cte tur adipiscing elit</h3>
             </div>
-            <div class="single_cat_right_content editorial"> <img src="images/editorial_img.png" alt="" />
+            <div class="single_cat_right_content editorial"> <img src="{{ url_for('static', filename='images/editorial_img.png') }}" alt="" />
               <h3>Lorem ipsum dolor sit amet con se cte tur adipiscing elit</h3>
             </div>
-            <div class="single_cat_right_content editorial"> <img src="images/editorial_img.png" alt="" />
+            <div class="single_cat_right_content editorial"> <img src="{{ url_for('static', filename='images/editorial_img.png') }}" alt="" />
               <h3>Lorem ipsum dolor sit amet con se cte tur adipiscing elit</h3>
             </div>
-            <div class="single_cat_right_content editorial"> <img src="images/editorial_img.png" alt="" />
+            <div class="single_cat_right_content editorial"> <img src="{{ url_for('static', filename='images/editorial_img.png') }}"alt="" />
               <h3>Lorem ipsum dolor sit amet con se cte tur adipiscing elit</h3>
             </div>
           </div>
         </div>
       </div>
       <div class="sidebar floatright">
-        <div class="single_sidebar"> <img src="images/add1.png" alt="" /> </div>
+        <div class="single_sidebar"> <img src="{{ url_for('static', filename='images/add1.png') }}" alt="" /> </div>
         <div class="single_sidebar">
           <div class="news-letter">
             <h2>Sign Up for Newsletter</h2>
@@ -305,14 +304,14 @@
             </ul>
             <a class="popular_more">more</a> </div>
         </div>
-        <div class="single_sidebar"> <img src="images/add1.png" alt="" /> </div>
+        <div class="single_sidebar"> <img src="{{ url_for('static', filename='images/add1.png') }}" alt="" /> </div>
         <div class="single_sidebar">
           <h2 class="title">ADD</h2>
-          <img src="images/add2.png" alt="" /> </div>
+          <img src="{{ url_for('static', filename='images/add2.png') }}" alt="" /> </div>
       </div>
     </div>
     <div class="footer_top_area">
-      <div class="inner_footer_top"> <img src="images/add3.png" alt="" /> </div>
+      <div class="inner_footer_top"> <img src="{{ url_for('static', filename='images/add3.png') }}" alt="" /> </div>
     </div>
     <div class="footer_bottom_area">
       <div class="footer_menu">
@@ -337,7 +336,7 @@
   </div>
 </div>
 
-<script type="text/javascript" src="js/selectnav.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/selectnav.min.js') }}"></script>
 <script type="text/javascript">
 selectnav('nav', {
     label: '-Navigation-',

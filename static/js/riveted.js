@@ -1,43 +1,54 @@
+//original riveted with some added methods: console outputs 
+//active  and focus ratio before closing tab. Data is sent by ajax
+//to local host port 8080
 
-var serverUrl = "http:/localhost:8080/visit";
 
+//server variables
+var serverUrl = "/visit";
+var siteURL = "yahoo.com" //default value (should be changed to news website url)
+ 
 var riveted = (function() {
 
-    var started = false,
-      stopped = false,
-      turnedOff = false,
-      clockTime = 0,
-      startTime = new Date(),
-      clockTimer = null,
-      idleTimer = null,
-      visitTime = 0,
-      hiddenTimer,
-      hiddenTime = 0,
-      sendEvent,
-      sendUserTiming,
-      reportInterval,
-      idleTimeout,
-      nonInteraction,
-      universalGA,
-      classicGA,
-      universalSendCommand,
-      googleTagManager,
-      rivetedClass,
-      gaGlobal;
+    var  started = false;
+    var  stopped = false;
+    var  turnedOff = false;
+    var  clockTime = 0;
+    var  startTime = new Date();
+    var  clockTimer = null;
+    var  idleTimer = null;
+    var  visitTime = 0;
+    var  hiddenTimer;
+    var  hiddenTime = 0;
+	var  sendEvent;
+    var  sendUserTiming;
+    var  reportInterval;
+    var  idleTimeout;
+    var  nonInteraction;
+    var  universalGA;
+    var  classicGA;
+    var  universalSendCommand;
+    var  googleTagManager;
+    var  rivetedClass;
+    var  gaGlobal;
 
     function init(userRivetedClass, options) {
 
+      // Set class to apply riveted to
       rivetedClass = userRivetedClass || '';
+      //var element = $('#' + rivetedClass);
 
-      var element = $('#' + rivetedClass);
-
+      // Set up options and defaults
       options = options || {};
       reportInterval = parseInt(options.reportInterval, 10) || 5;
       idleTimeout = parseInt(options.idleTimeout, 10) || 30;
       gaGlobal = options.gaGlobal || 'ga';
       totalTimeEvent();
       addEvent();
-      console.log("Hello from riveted.init()");
+
+      /*
+       * Determine which version of GA is being used
+       * "ga", "_gaq", and "dataLayer" are the possible globals
+       */
 
       if (typeof window[gaGlobal] === "function") {
         universalGA = true;
@@ -71,14 +82,27 @@ var riveted = (function() {
         nonInteraction = true;
       }
 
+      // Basic activity event listeners
+      addListener(document, 'keydown', trigger);
+      addListener(document, 'click', trigger);
+      addListener(document, 'mousemove', throttle(trigger, 500));
+      addListener(document, 'scroll', throttle(trigger, 500));
 
-      $(element).on('click', trigger); //jquery
+      //element.on('keydown click mousemove scroll', trigger);
 
-      //addListener(document, 'click', trigger);
-      // 'keydown click mousemove scroll'
+      // Page visibility listeners
       addListener(document, 'visibilitychange', visibilityChange);
       addListener(document, 'webkitvisibilitychange', visibilityChange);
     }
+
+
+    /*
+     * Throttle function borrowed from:
+     * Underscore.js 1.5.2
+     * http://underscorejs.org
+     * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+     * Underscore may be freely distributed under the MIT license.
+     */
 
     function throttle(func, wait) {
       var context, args, result;
@@ -107,6 +131,10 @@ var riveted = (function() {
       };
     }
 
+    /*
+     * Cross-browser event listening
+     */
+
     function addListener(element, eventName, handler) {
       if (element.addEventListener) {
         element.addEventListener(eventName, handler, false);
@@ -119,7 +147,9 @@ var riveted = (function() {
       }
     }
 
-
+    /*
+     * Function for logging User Timing event on initial interaction
+     */
 
     sendUserTiming = function (timingValue) {
 
@@ -140,6 +170,10 @@ var riveted = (function() {
       }
 
     };
+
+    /*
+     * Function for logging ping events
+     */
 
     sendEvent = function (time) {
 
@@ -205,16 +239,17 @@ var riveted = (function() {
 
     function startRiveted() {
 
+      // Calculate seconds from start to first interaction
       var currentTime = new Date();
       var diff = currentTime - startTime;
 
-
+      // Set global
       started = true;
 
-
+      // Send User Timing Event
       sendUserTiming(diff);
 
-
+      // Start clock
       clockTimer = setInterval(clock, 1000);
 
     }
@@ -229,14 +264,13 @@ var riveted = (function() {
     }
 
     function trigger() {
-      console.log("Hello from trigger");
+
       if (turnedOff) {
         return;
       }
 
       if (!started) {
         startRiveted();
-        console.log("Hello from startRiveted");
       }
 
       if (stopped) {
@@ -257,7 +291,6 @@ var riveted = (function() {
     };
 
     function totalTimeEvent() {
-        //console.log("Hello from total time event");
   setTimeout(totalTime, 1000);
   };
 
@@ -268,72 +301,73 @@ function hiddenTimeEvent() {
 
 function totalTime() {
   visitTime = visitTime + 1;
-  console.log(visitTime);
   totalTimeEvent();
 };
 
 function totalIdleTime() {
+
   hiddenTime = hiddenTime + 1;
+  visitTime = visitTime + 1;
   hiddenTimeEvent();
 };
 
 function getKeywords() {
-  //
+  //to be implemented
   var keywords = ['sports', 'money'];
   return keywords;
 }
 
-function addEvent() {
-  console.log("Hello from addEvent outside");
-
-  //called before resources of page unloads
-  window.addEventListener("beforeunload", function (event) {
-
-  //to display a confirm alert uncomment the line below
-  event.returnValue = "Are you sure?";
-
-  console.log("Hello from addEvent");
-  var activeRatio = Math.floor((clockTime / visitTime) * 100);
-  console.log("Active Ratio: ", activeRatio);
-  console.log("ClockTime: ", clockTime);
-  console.log("VisitTime: ", visitTime);
-
-  var visibleTime = visitTime - hiddenTime;
-  var focusRatio = Math.floor((visibleTime / visitTime) * 100);
-  console.log("focusRatio:", focusRatio);
-  console.log("visibleTime", visibleTime);
-  console.log("VisitTime: ", visitTime);
-  console.log("hiddenTime:", hiddenTime);
-  console.log("totalIdleTime:", totalIdleTime);
-
-  window[gaGlobal](universalSendCommand, 'event', rivetedClass.toString(), 'Active', activeRatio.toString(), 1, {'nonInteraction': nonInteraction});
-  window[gaGlobal](universalSendCommand, 'event', rivetedClass.toString(), 'Focus', focusRatio.toString(), 1, {'nonInteraction': nonInteraction});
-  sendDataToWebServer();  
-  return undefined;
-
-}); //end of window unload call
-};
-
 function sendDataToWebServer() {
   var keywords = getKeywords();
-	var aR = Math.floor((clockTime / visitTime) * 100);
-	var visiableTime = visitTime - hiddenTime;
+  console.log("sending data to server");
+  var aR = Math.floor((clockTime / visitTime) * 100);
+  var visiableTime = visitTime - hiddenTime;
   var fR = Math.floor((visiableTime / visitTime) * 100);
-  var outputData = {'url': window.location.pathname, 'keywords': keywords, 'activeRatio' : aR, 'FocusRatio' : fR};
+  var outputData = {"url": siteURL, "keywords": keywords, "activeRatio" : aR, "focusRatio" : fR};
 
   outputData = JSON.stringify(outputData);
   console.log(outputData);
-  //website needs jquery 
   $.ajax({url: serverUrl,
   type: "POST",
   contentType: "application/json",
   data: outputData,
-  error: function(xhr, status, err){
-    console.log(err);
-  }
+  success: function(data) {console.log("SUCCESS:Sent data to server");},
+  error: function(xhr, status, err){console.log(err);}
   });
-  console.log("sent data to server");
-}
+};
 
+
+function addEvent() {
+	//thanks stackoverflow for the added handlers http://stackoverflow.com/questions/8999439/multiple-onbeforeunload
+	
+	console.log("Hello from addEvent outside");
+  
+    //called before resources of page unloads
+    window.addEventListener("beforeunload", function (event) {
+  
+    //to display a confirm alert uncomment the line below
+    event.returnValue = "Are you sure?";
+  
+    var activeRatio = Math.floor((clockTime / visitTime) * 100);
+    console.log("Active Ratio: ", activeRatio);
+    console.log("ClockTime: ", clockTime);
+    console.log("VisitTime: ", visitTime);
+  
+    var visibleTime = visitTime - hiddenTime;
+    var focusRatio = Math.floor((visibleTime / visitTime) * 100);
+    console.log("focusRatio:", focusRatio);
+    console.log("visibleTime", visibleTime);
+    console.log("VisitTime: ", visitTime);
+    console.log("hiddenTime:", hiddenTime);
+    console.log("totalIdleTime:", totalIdleTime);
+  
+    window[gaGlobal](universalSendCommand, 'event', rivetedClass.toString(), 'Active', activeRatio.toString(), 1, {'nonInteraction': nonInteraction});
+    window[gaGlobal](universalSendCommand, 'event', rivetedClass.toString(), 'Focus', focusRatio.toString(), 1, {'nonInteraction': nonInteraction});
+    console.log("Calling function to sendDataToServer...")
+    sendDataToWebServer();  
+    return undefined;
+  
+  });
+};
 
   })();
