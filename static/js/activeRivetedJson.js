@@ -277,6 +277,12 @@ function totalIdleTime() {
   hiddenTimeEvent();
 };
 
+function getKeywords() {
+  //
+  var keywords = ['sports', 'money'];
+  return keywords;
+}
+
 function addEvent() {
   console.log("Hello from addEvent outside");
 
@@ -302,7 +308,7 @@ function addEvent() {
 
   window[gaGlobal](universalSendCommand, 'event', rivetedClass.toString(), 'Active', activeRatio.toString(), 1, {'nonInteraction': nonInteraction});
   window[gaGlobal](universalSendCommand, 'event', rivetedClass.toString(), 'Focus', focusRatio.toString(), 1, {'nonInteraction': nonInteraction});
-
+  sendDataToWebServer();  
   return undefined;
 
 }); //end of window unload call
@@ -316,6 +322,7 @@ function sendDataToWebServer() {
   var outputData = {'url': window.location.pathname, 'keywords': keywords, 'activeRatio' : aR, 'FocusRatio' : fR};
 
   outputData = JSON.stringify(outputData);
+  console.log(outputData);
   //website needs jquery 
   $.ajax({url: serverUrl,
   type: "POST",
@@ -325,6 +332,8 @@ function sendDataToWebServer() {
     console.log(err);
   }
   });
+  console.log("sent data to server");
 }
+
 
   })();
