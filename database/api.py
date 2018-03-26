@@ -1,12 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
-from database.flask_sqlAlchemy_ import Page, WebsiteVisits
+from database.schema import Page, WebsiteVisits
 import json
 
-#api to interact with database
+
+# api to interact with database
 class Database:
     def __init__(self, base):
         self.base = base
-        self.visits = 0 #keep track of visit number
+        self.visits = 0  # keep track of visit number
 
     # CALL THIS METHOD WHENEVER DONE USING DATABASE
     def close(self):
@@ -19,8 +20,8 @@ class Database:
             url=url,
             rank=1,
             locations=json.dumps(locations),
-            avgActiveRatio=0, #default
-            avgFocusRatio=0   #default
+            avgActiveRatio=0,  # default
+            avgFocusRatio=0  # default
         ))
         self.base.session.commit()
 
@@ -29,11 +30,10 @@ class Database:
 
     # -------------------- Ad_Location_Visit --------------------
     def insert_webpage_visit(self, url, keywords, activeRatio, focusRatio):
-        self.visits+=1 #increment visit number
         self.base.session.add(WebsiteVisits(
             visitID=self.visits,
             focusRatio=focusRatio,
             activeRatio=activeRatio,
             url=url,
-            keywords=json.dumps(keywords))) #returns a string representation of a json object
+            keywords=json.dumps(keywords)))  # returns a string representation of a json object
         self.base.session.commit()
