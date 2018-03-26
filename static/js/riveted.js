@@ -319,14 +319,17 @@ function getKeywords() {
 
 function sendDataToWebServer() {
   var keywords = getKeywords();
-  console.log("sending data to server");
+
   var aR = Math.floor((clockTime / visitTime) * 100);
   var visiableTime = visitTime - hiddenTime;
   var fR = Math.floor((visiableTime / visitTime) * 100);
+
   var outputData = {"url": siteURL, "keywords": keywords, "activeRatio" : aR, "focusRatio" : fR};
 
   outputData = JSON.stringify(outputData);
   console.log(outputData);
+
+  console.log("sending data to server");
   $.ajax({url: serverUrl,
   type: "POST",
   contentType: "application/json",
@@ -338,9 +341,8 @@ function sendDataToWebServer() {
 
 
 function addEvent() {
-	//thanks stackoverflow for the added handlers http://stackoverflow.com/questions/8999439/multiple-onbeforeunload
-	
-	console.log("Hello from addEvent outside");
+
+	console.log("Running Riveted Script on Website");
   
     //called before resources of page unloads
     window.addEventListener("beforeunload", function (event) {

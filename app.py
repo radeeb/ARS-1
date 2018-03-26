@@ -1,6 +1,7 @@
 #--------------------------------Imports---------------------------------------
 from flask import Flask, render_template, request, abort, url_for
-from database.flask_sqlAlchemy import *
+from database.flask_sqlAlchemy_ import *
+from database.api import Database
 import requests, os, json
 #------------------------------------------------------------------------------
 
@@ -14,14 +15,13 @@ app.config.update(dict(
 	SECRET_KEY="a722c63db8ec8625af6cf71cb8c2d939"))
 
 #setup the database
-
-Base.init_app(app)
-app.app_context().push()
-Base.create_all()
+Base.init_app(app) #bind the database instance to this application
+app.app_context().push() #useful when you have more than 1 flask app
+Base.create_all() #create all the tables
 DB = Database(Base)
 
 #add a page for testing DELETE ME
-#DB.insert_page("yahoo.com", ['sports', 'money'], [1,5,8])
+DB.insert_page("yahoo.com", [1,5,8])
 #======================DELETE ME=========================
 #------------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ def viewNews():
 def visit():
 	response = "You visited an ARS website!"
 	#load the data then put in database
-	data = json.loads(request.data)
+	data = json.loads(request.data) #decoding JSON to dictioanary
 	DB.insert_webpage_visit(data["url"], data["keywords"], data["activeRatio"], data["focusRatio"])
 	print("Visit successfully recorded in database")
 	return response
