@@ -1,61 +1,39 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy_declarative import Base, Page, Ad_Location_Visit, Page_Keyword
+from flask_sqlalchemy import SQLAlchemy
+from database.flask_sqlAlchemy_ import Page, WebsiteVisits
+import json
 
+#api to interact with database
 class Database:
-	def __init__(self):
-		self.engine = create_engine('sqlite:///database.db')
-		self.DBSession = sessionmaker(bind=self.engine)
-		self.session = self.DBSession()
+    def __init__(self, base):
+        self.base = base
+        self.visits = 0 #keep track of visit number
 
-	# CALL THIS METHOD WHENEVER DONE USING DATABASE
-	def close(self):
-		self.session.close()
+    # CALL THIS METHOD WHENEVER DONE USING DATABASE
+    def close(self):
+        self.base.session.remove()
 
+    # -------------------- Page --------------------------------
+    def insert_page(self, url, locations):  # location is a list of possible ad locations
+        # owner of the website uses this
+        self.base.session.add(Page(
+            url=url,
+            rank=1,
+            locations=json.dumps(locations),
+            avgActiveRatio=0, #default
+            avgFocusRatio=0   #default
+        ))
+        self.base.session.commit()
 
-	# -------------------- Page --------------------------------
-	def insert_page(self, values):
-		row = Page(id=values[0], url=values[1])
-		self.session.add(row)
-		self.session.commit()
+    def search_page(self, url):
+        return self.session.query(Page).get(url)
 
-	def search_page(self, id):
-		return self.session.query(Page).get(id)
-
-	# def delete_page(self, id):
-	# 	self.session.delete(self.search_page(id))
-	# 	self.session.commit()
-
-
-	# -------------------- Ad_Location_Visit --------------------
-	def insert_ad_location_visit(self, values):
-		row = Ad_Location_Visit(
-			id=values[0],
-			page_location=values[1],
-			focus_ratio=values[2],
-			active_ratio=values[3],
-			total_spent=values[4],
-			page_id=values[5],
-			created_at=values[6])
-		self.session.add(row)
-		self.session.commit()
-
-	def search_ad_location_visit(self, id):
-		return self.session.query(Ad_Location_Visit).get(id)
-
-	# def delete_ad_location_visit(self, id):
-	# 	self.session.delete(self.search_ad_location_visit(id))
-	# 	self.session.commit()
-
-
-	# -------------------- Page_Keyword -------------------------
-	def insert_page_keyword(self, values):
-		row = Page_Keyword(keyword=values[0], page_id=values[1])
-		self.session.add(row)
-		self.session.commit()
-
-	def search_page_keyword(self, id: int):
-		return self.session.query(Page_Keyword).filter_by(page_id=id).all()
-
-	def search_page_keyword(self, keyword: str):
-		return self.session.query(Page_Keyword).filter_by(keyword=keyword).all()
+    # -------------------- Ad_Location_Visit --------------------
+    def insert_webpage_visit(self, url, keywords, activeRatio, focusRatio):
+        self.visits+=1 #increment visit number
+        self.base.session.add(WebsiteVisits(
+            visitID=self.visits,
+            focusRatio=focusRatio,
+            activeRatio=activeRatio,
+            url=url,
+            keywords=json.dumps(keywords))) #returns a string representation of a json object
+        self.base.session.commit()
