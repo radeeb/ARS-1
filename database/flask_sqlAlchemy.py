@@ -7,8 +7,8 @@ Base = SQLAlchemy()
 class Page(Base.Model):
     url = Base.Column(Base.String(100), primary_key=True, unique=True)
     rank = Base.Column(Base.Integer)
-    avgActiveRatio = Base.Column(Base.Float)
-    avgFocusRatio = Base.Column(Base.Float)
+    avgActiveRatio = Base.Column(Base.Float) #accumulated active ratio avg of all website visits
+    avgFocusRatio = Base.Column(Base.Float)   #accumulated focus ratio avg of all website visits
     keywords = Base.Column(Base.Text)
     locations = Base.Column(Base.Text)
     visits = Base.relationship('WebsiteVisits', backref="page", lazy="dynamic")
@@ -49,7 +49,7 @@ class Database:
 
     # -------------------- Ad_Location_Visit --------------------
     def insert_webpage_visit(self, url, keywords, activeRatio, focusRatio):
-        self.visits+=1
+        self.visits+=1 #increment visit number
         self.base.session.add(WebsiteVisits(
             visitID=self.visits,
             focusRatio=focusRatio,
