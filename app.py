@@ -21,7 +21,8 @@ Base.create_all() #create all the tables
 DB = Database(Base)
 
 #add a page for testing DELETE ME
-DB.insert_page("yahoo.com", [1,5,8])
+#DB.insert_page("yahoo.com", [1,5,8])
+
 #======================DELETE ME=========================
 #------------------------------------------------------------------------------
 
