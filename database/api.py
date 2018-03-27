@@ -36,4 +36,5 @@ class Database:
             activeRatio=activeRatio,
             url=url,
             keywords=json.dumps(keywords)))  # returns a string representation of a json object
+        self.visits += 1
         self.base.session.commit()
