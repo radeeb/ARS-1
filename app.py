@@ -45,7 +45,7 @@ def viewNews():
 def visit():
     response = "You visited an ARS website!"
     # load the data then put in database
-    data = json.loads(request.data)  # decoding JSON to dictioanary
+    data = json.loads(request.data)  # decoding JSON to dictionary
     DB.insert_webpage_visit(data["url"], data["keywords"], data["activeRatio"], data["focusRatio"])
     print("Visit successfully recorded in database")
     return response
@@ -53,7 +53,6 @@ def visit():
 
 @app.route("/report", methods=["GET"])
 def report():
-    # get the yahoo site
     site = "report.html"
     return render_template(site)
 # ------------------------------------------------------------------------------
