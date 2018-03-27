@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from database.flask_sqlAlchemy_ import Page, WebsiteVisits, Page_Keyword
+from database.schema import Page, WebsiteVisits
 import json
 
 
@@ -30,7 +30,6 @@ class Database:
 
     # -------------------- Ad_Location_Visit --------------------
     def insert_webpage_visit(self, url, keywords, activeRatio, focusRatio):
-        self.visits += 1  # increment visit number
         self.base.session.add(WebsiteVisits(
             visitID=self.visits,
             focusRatio=focusRatio,
