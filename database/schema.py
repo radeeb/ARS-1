@@ -19,14 +19,12 @@ class Page(Base.Model):
 '''backref is a simple way to also declare a new property on the WebsiteVisits and Keywords class. 
 You can then use a_keyword.page to get to the page for that keyword'''
 
-
 class WebsiteVisits(Base.Model):
     visitID = Base.Column(Base.Integer, primary_key=True, autoincrement=True)
     url = Base.Column(Base.String(100), Base.ForeignKey('page.url'))
     keywords = Base.Column(Base.Text)
     activeRatio = Base.Column(Base.Float)
     focusRatio = Base.Column(Base.Float)
-
 
 class PageKeyword(Base.Model):
     keywords = Base.Column(Base.String, primary_key=True)
