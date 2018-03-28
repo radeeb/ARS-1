@@ -2,8 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 # Flask_SQLAlchemy handles the declarative base for you
 Base = SQLAlchemy()
-
-
 # EACH CLASS BELOW IS MAPPED TO A TABLE IN THE DATABASE
 class Page(Base.Model):
     url = Base.Column(Base.String(100), primary_key=True, unique=True)

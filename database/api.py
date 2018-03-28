@@ -31,7 +31,6 @@ class Database:
 
     # -------------------- Ad_Location_Visit --------------------
     def insert_webpage_visit(self, url, keywords, activeRatio, focusRatio):
-        self.visits +=1
         self.base.session.add(WebsiteVisits(
             visitID=self.visits,
             focusRatio=focusRatio,
