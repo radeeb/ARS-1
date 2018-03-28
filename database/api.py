@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
 from database.schema import Page, WebsiteVisits
 import json
 
@@ -40,5 +41,7 @@ class Database:
         self.base.session.commit()
 
     # function calculates avg active and focus ratio for the page
-    def update_ratios(self, url, aR, fR):
+    def update_ratios(self, url, avgActive, avgFocus):
         pass
+
+

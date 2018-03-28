@@ -16,25 +16,18 @@ app.config.update(dict(
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
     SECRET_KEY="a722c63db8ec8625af6cf71cb8c2d939"))
 
-# setup the database
+# -------------------------------- Setup the database---------------------------
 Base.init_app(app)  # bind the database instance to this application
 app.app_context().push()  # useful when you have more than 1 flask app
 Base.create_all()  # create all the tables
 DB = Database(Base)
 
-<<<<<<< HEAD
-#add a page for testing DELETE ME
-#DB.insert_page("yahoo.com", [1,5,8])
-
-#======================DELETE ME=========================
-#------------------------------------------------------------------------------
-=======
-# add a page for testing. DELETE ME AFTER FIRST TIME RUNNING APP
-DB.insert_page("yahoo.com", [1, 5, 8])
-# ------------------------------------------------------------------------------
->>>>>>> f282769dc67a7ee6755c010aae16028c35afd730
-
-
+#load default pages
+try:
+    if(Page.query.all() == None):
+        DB.insert_page("/news", [1, 5, 8])
+except Exception as e:
+    print("An exception was thrown while inserting default pages")
 # --------------------------------Web Interface---------------------------------
 @app.route("/", methods=["GET"])
 def index():
@@ -63,7 +56,9 @@ def visit():
 def report():
     # get the yahoo site
     site = "report.html"
+
     return render_template(site)
+
 # ------------------------------------------------------------------------------
 
 
