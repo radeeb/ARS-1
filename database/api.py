@@ -35,14 +35,18 @@ class Database:
             visitID=self.visits,
             focusRatio=focusRatio,
             activeRatio=activeRatio,
-            url=url,
-            keywords=json.dumps(keywords)))  # returns a string representation of a json object
+            url=url))
         self.visits += 1
 
         # Update average focus/active ratio for this Page
         visits = WebsiteVisits.query.filter_by(url=url).all()
         activeRatios = 0
+        focusRatios = 0
         for visit in visits:
             activeRatios += visit.activeRatio
+            focusRatios += visit.focusRatio
+        page = Page.query.get(url)
+        page.avgActiveRatio = activeRatios / len(visits)
+        page.avgFocusRatio = focusRatios / len(visits)
 
         self.base.session.commit()

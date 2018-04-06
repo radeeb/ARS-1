@@ -49,7 +49,7 @@ def visit():
     response = "You visited an ARS website!"
     # load the data then put in database
     data = json.loads(request.data)  # decoding JSON to dictionary
-    DB.insert_webpage_visit(data["url"], data["keywords"], data["activeRatio"], data["focusRatio"])
+    DB.insert_webpage_visit(data["url"], data["activeRatio"], data["focusRatio"])
     print("Visit successfully recorded in database")
     return response
 

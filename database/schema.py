@@ -14,7 +14,6 @@ class Page(Base.Model):
     locations = Base.Column(Base.Text)  # list of ad locations
     visits = Base.relationship('WebsiteVisits', backref="page",
                                lazy="dynamic")  # one to many relationship with website visits
-    keywords = Base.relationship('PageKeyword', backref="page", lazy="dynamic")
 
 
 '''backref is a simple way to also declare a new property on the WebsiteVisits and Keywords class.
@@ -24,7 +23,6 @@ You can then use a_keyword.page to get to the page for that keyword'''
 class WebsiteVisits(Base.Model):
     visitID = Base.Column(Base.Integer, primary_key=True)
     url = Base.Column(Base.String(100), Base.ForeignKey('page.url'))
-    keywords = Base.Column(Base.Text)
     activeRatio = Base.Column(Base.Float)
     focusRatio = Base.Column(Base.Float)
 
