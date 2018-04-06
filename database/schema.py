@@ -4,6 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 Base = SQLAlchemy()
 # EACH CLASS BELOW IS MAPPED TO A TABLE IN THE DATABASE
 class Page(Base.Model):
+    sumActive = 0
+    sumFocus = 0
+    sumVisits = 0
+
     url = Base.Column(Base.String(100), primary_key=True, unique=True)
     rank = Base.Column(Base.Integer)
     avgActiveRatio = Base.Column(Base.Float)  # accumulated active ratio avg of all website visits

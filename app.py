@@ -1,5 +1,6 @@
 # --------------------------------Imports---------------------------------------
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+from flask_sqlalchemy import SQLAlchemy
 from database.schema import *
 from database.api import Database
 import os, json
@@ -22,12 +23,16 @@ app.app_context().push()  # useful when you have more than 1 flask app
 Base.create_all()  # create all the tables
 DB = Database(Base)
 
+
 #load default pages
 try:
-    if(Page.query.all() == None):
+    if(Page.query.first() == None):
         DB.insert_page("/news", [1, 5, 8])
 except Exception as e:
     print("An exception was thrown while inserting default pages")
+
+#print(DB.update_ratios("/news"))
+
 # --------------------------------Web Interface---------------------------------
 @app.route("/", methods=["GET"])
 def index():

@@ -38,10 +38,10 @@ class Database:
             url=url,
             keywords=json.dumps(keywords)))  # returns a string representation of a json object
         self.visits += 1
+        # calculate the new average for page
+        page = Page.query.get(url)
+        page.sumActive += activeRatio
+        page.sumVisits += 1
+        page.avgActiveRatio = page.sumActive / page.sumVisits
         self.base.session.commit()
-
-    # function calculates avg active and focus ratio for the page
-    def update_ratios(self, url, avgActive, avgFocus):
-        pass
-
 
