@@ -26,10 +26,11 @@ class Database:
         self.base.session.commit()
 
     def search_page(self, url):
-        return self.session.query(Page).get(url)
+        return self.base.session.query(Page).get(url)
 
     # -------------------- Ad_Location_Visit --------------------
-    def insert_webpage_visit(self, url, keywords, activeRatio, focusRatio):
+    def insert_webpage_visit(self, url, activeRatio, focusRatio):
+        # Insert the web page visit
         self.base.session.add(WebsiteVisits(
             visitID=self.visits,
             focusRatio=focusRatio,
@@ -37,4 +38,11 @@ class Database:
             url=url,
             keywords=json.dumps(keywords)))  # returns a string representation of a json object
         self.visits += 1
+
+        # Update average focus/active ratio for this Page
+        visits = WebsiteVisits.query.filter_by(url=url).all()
+        activeRatios = 0
+        for visit in visits:
+            activeRatios += visit.activeRatio
+
         self.base.session.commit()

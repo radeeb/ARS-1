@@ -22,12 +22,11 @@ app.app_context().push()  # useful when you have more than 1 flask app
 Base.create_all()  # create all the tables
 DB = Database(Base)
 
-# add a page for testing. DELETE ME AFTER FIRST TIME RUNNING APP
 try:
-    if(Page.query.first() == None):
-        DB.insert_page("yahoo.com", [1, 5, 8])
+    if (Page.query.first() == None):
+        DB.insert_page("/news", [1, 5, 8])
 except Exception as e:
-    print("An exception was thrown while inserting test page")
+    print(e)
 # ------------------------------------------------------------------------------
 
 
@@ -63,8 +62,8 @@ def report():
 
 
 # --------------------------------Functions/Classes-----------------------------
-keys = kwf.getKeys("www.ky3.com")
-print(keys)
+# keys = kwf.getKeys("www.ky3.com")
+# print(keys)
 # ------------------------------------------------------------------------------
 
 
