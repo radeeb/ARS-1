@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from database.schema import *
 from database.api import Database
 import os, json
-import modules.keyword_finder as kwf
+import modules.keywordFinder.keyword_finder as kwf
 # ------------------------------------------------------------------------------
 
 
@@ -23,7 +23,11 @@ Base.create_all()  # create all the tables
 DB = Database(Base)
 
 # add a page for testing. DELETE ME AFTER FIRST TIME RUNNING APP
-DB.insert_page("yahoo.com", [1, 5, 8])
+try:
+    if(Page.query.first() == None):
+        DB.insert_page("yahoo.com", [1, 5, 8])
+except Exception as e:
+    print("An exception was thrown while inserting test page")
 # ------------------------------------------------------------------------------
 
 
@@ -59,7 +63,8 @@ def report():
 
 
 # --------------------------------Functions/Classes-----------------------------
-# keys = kwf.getKeys(url)
+keys = kwf.getKeys("www.ky3.com")
+print(keys)
 # ------------------------------------------------------------------------------
 
 

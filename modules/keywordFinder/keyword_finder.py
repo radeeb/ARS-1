@@ -5,12 +5,12 @@ import urllib.request
     website:    FULL website URL for scraping (http:// included automatically)
     ex:
     www.ky3.com/content/news/Police-investigating-a-suspicious-death-in-north-Springfield-478493043.html
-
+    
     Uses a best guess to find the main article in a news site and then parses it into a list
     Based on the idea that the division tag with the most paragraph tags has the highest probability to be the main article
-
+    
     Returns getKeyWords(), which returns a list of keywords
-
+    
     Example use:
         keyWordsForMe = getKeys(websiteURL)
         keyWordsForMe = [key1, ..., keyN]
@@ -18,15 +18,15 @@ import urllib.request
 
 def getKeys(website):
     IGNORELIST = "IgnoredWords.txt"
-
+    
     website = 'http://' + website
     #request = urllib.request.Request(website, None, headers)
-
+  
     response = urllib.request.urlopen(website).read()
     soup = BeautifulSoup(response, "html.parser")
-
+       
     divs = soup.body.find_all("div")    #list of all div tags in html
-
+    
     #find the <div> with the most <p> tags. Main algorithm in method
     tagMax = 0
     iter = 0
@@ -35,7 +35,7 @@ def getKeys(website):
     for div in divs:
         pTags = div.find_all('p')
         tagCount = 0
-
+        
         for tag in pTags:
             tagCount += 1
         #keep running tally of most p tags
@@ -43,7 +43,7 @@ def getKeys(website):
             tagMax = tagCount
             bestDiv = iter
         iter += 1
-
+    
     #start with the title and then append bestDiv to articleText
     articleText = soup.title.string
     """
@@ -53,26 +53,26 @@ def getKeys(website):
     for para in (divs[bestDiv].find_all('p')):
         if('class' not in para.attrs):
             articleText += para.get_text()
-
+    
     ignoreList = readFile(IGNORELIST)
-
+    
     #print(articleText)
     return getKeyWords(articleText.split(), ignoreList)
 
-
+    
 """
     words:      list of words in an article
     ignoreMe:   list of words in a stop word list
-
+    
     Finds the most frequently used words while ignoring commonly used words
         Variable number of keywords dependent on article size
-
+    
     Returns a list of keywords with variable size
-"""
+"""   
 def getKeyWords(words, ignoreList):
     MINKEYS = 4     #Minimum number of keys to return
     MAXKEYS = 10    #Maximum number of keys to return
-
+    
     keyWords = []
     punctuation = ['.',',','!','(',')','?', '"', '-', '\n', '\r']
     #1 keyword per 250 words in article
@@ -80,7 +80,7 @@ def getKeyWords(words, ignoreList):
     #minimum of 5 keywords per article
     if(keyNum < MINKEYS):
         keyNum = MINKEYS
-
+    
     for i in range(len(words)):
         word = words[i]
         #Strip punctuation from the words first
@@ -89,7 +89,7 @@ def getKeyWords(words, ignoreList):
         #puts one version of each word into keyWords
         if word not in ignoreList and word not in keyWords:
             keyWords.append(word)
-
+            
     counts = []
     #counts occurrences
     for key in keyWords:
@@ -98,19 +98,19 @@ def getKeyWords(words, ignoreList):
             if word == key:
                 count += 1
         counts.append((count, key))
-
+    
     counts.sort()
     counts.reverse()
-
+    
     keywordsFinal = []
     #prints them
     for i in range(min(min(keyNum, len(counts)), MAXKEYS)):
         count, word = counts[i]
         #print('%s %d' % (word, count))
         keywordsFinal.append(word)
-
-    return keywordsFinal
-
+        
+    return keywordsFinal    
+    
 """
     Takes filename string
     Returns list of things in file
@@ -120,5 +120,5 @@ def getKeyWords(words, ignoreList):
 def readFile(input_filename):
     with open(input_filename, 'r') as array_file:
         array_data = [str(val) for val in array_file.read().split()]
-
-    return array_data
+        
+    return array_data 
