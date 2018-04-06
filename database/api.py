@@ -7,7 +7,6 @@ import json
 class Database:
     def __init__(self, base):
         self.base = base
-        self.visits = 0  # keep track of visit number
 
     # CALL THIS METHOD WHENEVER DONE USING DATABASE
     def close(self):
@@ -32,11 +31,9 @@ class Database:
     def insert_webpage_visit(self, url, activeRatio, focusRatio):
         # Insert the web page visit
         self.base.session.add(WebsiteVisits(
-            visitID=self.visits,
             focusRatio=focusRatio,
             activeRatio=activeRatio,
             url=url))
-        self.visits += 1
 
         # Update average focus/active ratio for this Page
         visits = WebsiteVisits.query.filter_by(url=url).all()

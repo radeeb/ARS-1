@@ -21,7 +21,7 @@ You can then use a_keyword.page to get to the page for that keyword'''
 
 
 class WebsiteVisits(Base.Model):
-    visitID = Base.Column(Base.Integer, primary_key=True)
+    visitID = Base.Column(Base.Integer, primary_key=True, autoincrement=True)
     url = Base.Column(Base.String(100), Base.ForeignKey('page.url'))
     activeRatio = Base.Column(Base.Float)
     focusRatio = Base.Column(Base.Float)
