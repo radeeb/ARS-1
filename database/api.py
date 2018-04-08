@@ -12,6 +12,7 @@ class Database:
     def close(self):
         self.base.session.remove()
 
+
     # -------------------- Page --------------------------------
     def insert_page(self, url, locations):  # location is a list of possible ad locations
         # owner of the website uses this
@@ -24,10 +25,11 @@ class Database:
         ))
         self.base.session.commit()
 
-    def search_page(self, url):
-        return self.base.session.query(Page).get(url)
+    def get_all_pages(self):
+        return self.base.session.query(Page).all()
 
-    # -------------------- Ad_Location_Visit --------------------
+
+    # -------------------- WebpageVisits --------------------
     def insert_webpage_visit(self, url, activeRatio, focusRatio):
         # Insert the web page visit
         self.base.session.add(WebsiteVisits(

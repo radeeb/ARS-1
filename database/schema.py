@@ -1,11 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.ext.orderinglist import ordering_list
 
-# Flask_SQLAlchemy handles the declarative base for you
+# Declarative base for the SQLAlchemy ORM
 Base = SQLAlchemy()
 
 
 # EACH CLASS BELOW IS MAPPED TO A TABLE IN THE DATABASE
+
 class Page(Base.Model):
     url = Base.Column(Base.String(100), primary_key=True)
     rank = Base.Column(Base.Integer)

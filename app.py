@@ -16,7 +16,7 @@ app.config.update(dict(
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
     SECRET_KEY="a722c63db8ec8625af6cf71cb8c2d939"))
 
-# setup the database
+# Setup the database
 Base.init_app(app)  # bind the database instance to this application
 app.app_context().push()  # useful when you have more than 1 flask app
 Base.create_all()  # create all the tables
@@ -37,7 +37,7 @@ def index():
     return render_template(site)
 
 
-# route for our local news website
+# Route for our local news website
 @app.route("/news", methods=["GET"])
 def viewNews():
     site = "news.html"
@@ -53,17 +53,22 @@ def visit():
     print("Visit successfully recorded in database")
     return response
 
-
+# Builds a report from the pages in the database
 @app.route("/report", methods=["GET"])
 def report():
-    site = "report.html"
-    return render_template(site)
+    pages = DB.get_all_pages()
+    Reports = [dict(URL=page.url, 
+                    Rank=page.rank, 
+                    ActiveRatio=page.avgActiveRatio, 
+                    FocusRatio=page.avgFocusRatio, 
+                    Locations=page.locations) for page in pages]
+    return render_template("report.html", Reports=Reports)
 # ------------------------------------------------------------------------------
 
 
 # --------------------------------Functions/Classes-----------------------------
-# keys = kwf.getKeys("www.ky3.com")
-# print(keys)
+keys = kwf.getKeys("www.ky3.com")
+print(keys)
 # ------------------------------------------------------------------------------
 
 

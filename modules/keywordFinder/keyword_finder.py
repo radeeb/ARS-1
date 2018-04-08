@@ -17,7 +17,7 @@ import urllib.request
 """
 
 def getKeys(website):
-    IGNORELIST = "IgnoredWords.txt"
+    IGNORELIST = "modules/keywordFinder/IgnoredWords.txt"
     
     website = 'http://' + website
     #request = urllib.request.Request(website, None, headers)
@@ -114,11 +114,9 @@ def getKeyWords(words, ignoreList):
 """
     Takes filename string
     Returns list of things in file
-
     Simple file reader
 """
 def readFile(input_filename):
     with open(input_filename, 'r') as array_file:
-        array_data = [str(val) for val in array_file.read().split()]
-        
+        array_data = [str(val) for val in array_file.read().split()]        
     return array_data 

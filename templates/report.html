@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
 	Project Name:Advertisment Recommender System
-	Description:Showcases a report for the user.
+	Description:Showcases a report for the user after being called by app.py
 -->
 
 <html>
@@ -14,50 +14,33 @@
 	
 	<body>
 	
-		<h1> Reccommended Advertisement Spaces </h1>
+		<h1> Recommended Advertisement Spaces </h1>
 		
+		<!--Search bar for search javascript. Is not fully implemented with newly created table.-->
 		<input type="text" id="myInput" onkeyup="keywordSearch()" placeholder="Search for keywords..">
-
-		<table id="databaseResults">
-			<tr>
-				<th>Ad Space</th>
-				<th>Price</th>
-				<th>Keywords</th>
-			</tr>
-			
-			<tr>
-				<td>Middle of the page</td>
-				<td>$150</td>
-				<td> Dogs, Cats, Dolphins, Hoops </td>
-			</tr>
-			
-			<tr>
-				<td>Adoption Page Sidebar</td>
-				<td>$50</td>
-				<td> Dogs, Cats, Dolphins, Squirrels </td>
-			</tr>
-			
-			<tr>
-				<td>Headliner</td>
-				<td>$300</td>
-				<td> Llama </td>
-			</tr>
-			
-			<tr>
-				<td>Bottom of the page</td>
-				<td>$90</td>
-				<td> Pizza, Recipes, Oscars </td>
-			</tr>
-			
-			<tr>
-				<td>Sports page headliner</td>
-				<td>$550</td>
-				<td> Football, Signing, Drafts,2018 </td>
-			</tr>
-				
-				
+		
+			<!--Loops through database and inserts given values into assigned rows of the table-->
+			<table id="databaseresults">
+				<thead>
+					<tr>
+						<th>URL</th>
+						<th>Rank</th>
+						<th>ActiveRatio</th>
+						<th>FocusRatio</th>
+						<th>Locations</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for row in Reports %}
+				<tr>
+					<td>{{row.URL}}</td>
+					<td>{{row.Rank}}</td>
+					<td>{{row.ActiveRatio}}</td>
+					<td>{{row.FocusRatio}}</td>
+					<td>{{row.Locations}}</td>
+				</tr>
+					{% endfor %}
+				</tbody>
 			</table>
 	</body>
-	
-	
 </html>
