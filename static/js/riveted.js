@@ -1,4 +1,4 @@
-//original riveted with some added methods: console outputs 
+//original riveted with some added methods: console outputs
 //active  and focus ratio before closing tab. Data is sent by ajax
 //to local host port 8080
 
@@ -6,6 +6,7 @@
 //server variables
 var serverUrl = "/visit";
 var siteURL = window.location.pathname
+
 
 var riveted = (function () {
 
@@ -323,20 +324,13 @@ var riveted = (function () {
         hiddenTimeEvent();
     };
 
-    function getKeywords() {
-        //to be implemented
-        var keywords = ['sports', 'money'];
-        return keywords;
-    }
-
     function sendDataToWebServer() {
-        var keywords = getKeywords();
 
         var aR = Math.floor((clockTime / visitTime) * 100);
         var visiableTime = visitTime - hiddenTime;
         var fR = Math.floor((visiableTime / visitTime) * 100);
 
-        var outputData = {"url": siteURL, "keywords": keywords, "activeRatio": aR, "focusRatio": fR};
+        var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR};
 
         outputData = JSON.stringify(outputData);
         console.log(outputData);

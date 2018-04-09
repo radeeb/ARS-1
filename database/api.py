@@ -1,5 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import func
 from database.schema import Page, WebsiteVisits
 import json
 
@@ -8,11 +7,11 @@ import json
 class Database:
     def __init__(self, base):
         self.base = base
-        self.visits = 0  # keep track of visit number
 
     # CALL THIS METHOD WHENEVER DONE USING DATABASE
     def close(self):
         self.base.session.remove()
+
 
     # -------------------- Page --------------------------------
     def insert_page(self, url, locations):  # location is a list of possible ad locations
@@ -26,22 +25,27 @@ class Database:
         ))
         self.base.session.commit()
 
-    def search_page(self, url):
-        return self.session.query(WebsiteVisits).get(url)
+    def get_all_pages(self):
+        return self.base.session.query(Page).all()
 
-    # -------------------- Ad_Location_Visit --------------------
-    def insert_webpage_visit(self, url, keywords, activeRatio, focusRatio):
+
+    # -------------------- WebpageVisits --------------------
+    def insert_webpage_visit(self, url, activeRatio, focusRatio):
+        # Insert the web page visit
         self.base.session.add(WebsiteVisits(
-            visitID=self.visits,
             focusRatio=focusRatio,
             activeRatio=activeRatio,
-            url=url,
-            keywords=json.dumps(keywords)))  # returns a string representation of a json object
-        self.visits += 1
-        # calculate the new average for page
-        page = Page.query.get(url)
-        page.sumActive += activeRatio
-        page.sumVisits += 1
-        page.avgActiveRatio = page.sumActive / page.sumVisits
-        self.base.session.commit()
+            url=url))
 
+        # Update average focus/active ratio for this Page
+        visits = WebsiteVisits.query.filter_by(url=url).all()
+        activeRatios = 0
+        focusRatios = 0
+        for visit in visits:
+            activeRatios += visit.activeRatio
+            focusRatios += visit.focusRatio
+        page = Page.query.get(url)
+        page.avgActiveRatio = activeRatios / len(visits)
+        page.avgFocusRatio = focusRatios / len(visits)
+
+        self.base.session.commit()
