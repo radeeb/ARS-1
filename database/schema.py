@@ -16,7 +16,7 @@ class Page(Base.Model):
     visits = Base.relationship('WebsiteVisits', backref="page",
                                lazy="dynamic")  # one to many relationship with website visits
     keywords = Base.relationship('PageKeyword', backref="page", lazy="dynamic")
-
+    activeRatios = Base.Column(Base.Text)  # list of activeRatios locations
 
 '''backref is a simple way to also declare a new property on the WebsiteVisits and Keywords class. 
 You can then use a_keyword.page to get to the page for that keyword'''

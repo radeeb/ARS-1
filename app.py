@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from database.schema import *
 from database.api import Database
 import os, json
-import modules.keyword_finder as kwf
+import modules.keywordFinder.keyword_finder as kwf
 # ------------------------------------------------------------------------------
 
 
@@ -67,7 +67,8 @@ def report():
 
 
 # --------------------------------Functions/Classes-----------------------------
-# keys = kwf.getKeys(url)
+#keys = kwf.getKeys("www.ky3.com")
+#print(keys)
 # ------------------------------------------------------------------------------
 
 
