@@ -24,5 +24,5 @@ class WebsiteVisits(Base.Model):
     focusRatio = Base.Column(Base.Float)
 
 class PageKeyword(Base.Model):
-    keywords = Base.Column(Base.String, primary_key=True)
+    keyword = Base.Column(Base.String, primary_key=True)
     page_url = Base.Column(Base.Integer, Base.ForeignKey("page.url"), primary_key=True)

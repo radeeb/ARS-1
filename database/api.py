@@ -49,3 +49,9 @@ class Database:
         page.avgFocusRatio = focusRatios / len(visits)
 
         self.base.session.commit()
+
+    def update_keywords(self, url, keywords):
+        # Insert the web page visit
+        page = Page.query.get(url)
+        page.keywords = keywords
+        self.base.session.commit()
