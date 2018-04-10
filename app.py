@@ -17,9 +17,9 @@ app.config.update(dict(
     SECRET_KEY="a722c63db8ec8625af6cf71cb8c2d939"))
 
 # Setup the database
-Base.init_app(app)  # bind the database instance to this application
+Base.init_app(app)        # bind the database instance to this application
 app.app_context().push()  # useful when you have more than 1 flask app
-Base.create_all()  # create all the tables
+Base.create_all()         # create all the tables
 DB = Database(Base)
 # ------------------------------------------------------------------------------
 
@@ -35,6 +35,18 @@ def index():
 @app.route("/news", methods=["GET"])
 def viewNews():
     site = "news.html"
+    return render_template(site)
+    
+# Route for our local world news
+@app.route("/worldNews", methods=["GET"])
+def viewWorldNews():
+    site = "worldNews.html"
+    return render_template(site)
+    
+# Route for our local sports website
+@app.route("/sports", methods=["GET"])
+def viewSports():
+    site = "sports.html"
     return render_template(site)
 
 
