@@ -22,9 +22,9 @@
                 <a class="navbar-brand" href="#">ARS NAVIGATION</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li><a href="{{ url_for('index') }}">HOME</a></li>
                 <li><a href="{{ url_for('viewNews') }}">NEWS</a></li>
-                <li><a href="{{ url_for('report') }}">ADMIN REPORT</a></li>
+                <li class="active"><a href="{{ url_for('report') }}">ADMIN REPORT</a></li>
                 <li><a href="{{ url_for('report') }}">CLIENT REPORT</a></li>
             </ul>
         </div>
