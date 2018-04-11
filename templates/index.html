@@ -9,18 +9,18 @@
 <body>
 
 <div class="container-fluid bg-3 text-center">
-    <h3> ARS HOME</h3>
+    <h1> ARS HOME</h1>
     <div class="row">
         <div class="col-sm-4">
-            <p> NEWS WEBSITE</p>
+            <h3> NEWS WEBSITE</h3>
             <a href="{{ url_for('viewNews') }}"><img src="http://blog.thebrickfactory.com/design/images/nyt.gif" alt="Image"></a>
         </div>
         <div class="col-sm-4">
-            <p> ADMIN REPORT</p>
+            <h3> ADMIN REPORT</h3>
             <a href="{{ url_for('report') }}"><img src="https://marketingland.com/wp-content/ml-loads/2014/11/analytics-ss-1920-800x450.jpg" alt="Image"></a>
         </div>
         <div class="col-sm-4">
-            <p> CLIENT REPORT </p>
+            <h3> CLIENT REPORT </h3>
             <a href="{{ url_for('report') }}"><img src="https://tips4working.files.wordpress.com/2016/10/report1.jpg" alt="Image"></a>
         </div>
     </div>
@@ -32,5 +32,8 @@
     max-height: 250px;
     max-width: 250px;
     }
+
+    h1 {background-color: #cce5cc;}
+
 </style>
 </html>
