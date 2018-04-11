@@ -70,52 +70,12 @@
       </div>
     </div>
     <div class="main_menu_area">
-      <ul id="nav">
-        <li><a href="/worldNews">world news</a>
-        </li>
-        <li><a href="/sports">sports</a></li>
-        <li><a href="#">tech</a>
-          <ul>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-          </ul>
-        </li>
-        <li><a href="#">business</a></li>
-        <li><a href="#">Movies</a>
-          <ul>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a>
-              <ul>
-                <li><a href="#">Single item</a></li>
-                <li><a href="#">Single item</a></li>
-                <li><a href="#">Single item</a></li>
-                <li><a href="#">Single item</a></li>
-                <li><a href="#">Single item</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-          </ul>
-        </li>
-        <li><a href="#">entertainment</a></li>
-        <li><a href="#">culture</a></li>
-        <li><a href="#">Books</a>
-          <ul>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-            <li><a href="#">Single item</a></li>
-          </ul>
-        </li>
-        <li><a href="/news">home</a></li>
-        <li><a href="#">blogs</a></li>
-      </ul>
-    </div>
+            <ul id="nav">
+                <li><a href="{{ url_for('viewNews') }}">Home</a></li>
+                <li><a href="{{ url_for('viewSports') }}">Sports</a></li>
+                <li><a href="{{ url_for('viewWorldNews') }}">World News</a></li>
+            </ul>
+        </div>
 	<h2 class="title">World News</h2>
 	<h3 id ="header">World largest dinisaur found in Scottland</h3>
 	<p id="article">Rare dinosaur footprints belonging to the largest animal to ever roam the planet have been found in Scotland.
@@ -134,7 +94,9 @@ pivotal time in their evolution. It also shows many dinosaurs, far from being re
  “The more we look on the Isle of Skye, the more dinosaur footprints we find.
 	</p>
 </div>
-
+<div id = "validators">  <!-- You could keep inside the overallContent div -->
+		<a href="{{ url_for('index') }}"><img src="https://cdn.arstechnica.net/wp-content/themes/arstechnica/assets/images/ars-logo-open-grey.png" alt="Valid HTML5" /></a> <br />
+</div>
 <script type="text/javascript" src="{{ url_for('static', filename='js/selectnav.min.js') }}"></script>
 <script type="text/javascript">
 selectnav('nav', {
@@ -153,4 +115,14 @@ $('.bxslider').bxSlider({
 });
 </script>
 </body>
+<style>
+    #validators {
+   position: fixed;
+   left: 20px;
+   top: 20px;
+   height: 100px;
+   width: 100px;
+ }
+
+</style>
 </html>

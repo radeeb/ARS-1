@@ -83,7 +83,9 @@ def report():
 def store_keywords(url):
     keywords = kwf.getKeys(url)
     DB.insert_keywords(url, keywords)
+
 # ------------------------------------------------------------------------------
+
 
 
 # --------------------------------Program Main----------------------------------

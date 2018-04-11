@@ -5,7 +5,8 @@
 
 //server variables
 var serverUrl = "/visit";
-var siteURL = window.location.pathname //default value (should be changed to news website url)
+var siteURL = window.location.pathname
+
 
 var riveted = (function () {
 

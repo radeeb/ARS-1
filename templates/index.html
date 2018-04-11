@@ -3,8 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>ARS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <p> WELCOME TO ARS</p>
+
+<div class="container-fluid bg-3 text-center">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ARS NAVIGATION</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">HOME</a></li>
+                <li><a href="{{ url_for('viewNews') }}">NEWS</a></li>
+                <li><a href="{{ url_for('report') }}">ADMIN REPORT</a></li>
+                <li><a href="{{ url_for('report') }}">CLIENT REPORT</a></li>
+            </ul>
+        </div>
+    </nav>
+    <h1> ARS HOME</h1>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3> NEWS WEBSITE</h3>
+            <a href="{{ url_for('viewNews') }}"><img src="http://blog.thebrickfactory.com/design/images/nyt.gif" alt="Image"></a>
+        </div>
+        <div class="col-sm-4">
+            <h3> ADMIN REPORT</h3>
+            <a href="{{ url_for('report') }}"><img src="https://marketingland.com/wp-content/ml-loads/2014/11/analytics-ss-1920-800x450.jpg" alt="Image"></a>
+        </div>
+        <div class="col-sm-4">
+            <h3> CLIENT REPORT </h3>
+            <a href="{{ url_for('report') }}"><img src="https://tips4working.files.wordpress.com/2016/10/report1.jpg" alt="Image"></a>
+        </div>
+    </div>
+</div>
 </body>
+
+<style>
+    img {
+    max-height: 250px;
+    max-width: 250px;
+    }
+
+    h1 {background-color: #cce5cc;}
+
+</style>
 </html>

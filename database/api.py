@@ -51,7 +51,6 @@ class Database:
 
         self.base.session.commit()
 
-
     # -------------------- PageKeywords ---------------------
     def insert_keywords(self, url, keywords):
         for kw in keywords:
