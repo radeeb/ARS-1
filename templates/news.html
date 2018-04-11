@@ -74,10 +74,9 @@
         </div>
         <div class="main_menu_area">
             <ul id="nav">
-                <li><a href="#">world news</a></li>
-                <li><a href="#">sports</a></li>
-                <li><a href="#">tech</a></li>
-                <li><a href="#">business</a></li>
+                <li><a href="{{ url_for('viewNews') }}">Home</a></li>
+                <li><a href="{{ url_for('viewSports') }}">Sports</a></li>
+                <li><a href="{{ url_for('viewWorldNews') }}">World News</a></li>
             </ul>
         </div>
         <div class="content_area">
@@ -309,7 +308,9 @@
         </div>
     </div>
 </div>
-
+<div id = "validators">  <!-- You could keep inside the overallContent div -->
+		<a href="{{ url_for('index') }}"><img src="https://cdn.arstechnica.net/wp-content/themes/arstechnica/assets/images/ars-logo-open-grey.png" alt="Valid HTML5" /></a> <br />
+</div>
 <script type="text/javascript" src="{{ url_for('static', filename='js/selectnav.min.js') }}"></script>
 <script type="text/javascript">
 selectnav('nav', {
@@ -329,4 +330,15 @@ $('.bxslider').bxSlider({
 
 </script>
 </body>
+<style>
+    #validators {
+   position: fixed;
+   left: 20px;
+   top: 20px;
+   height: 100px;
+   width: 100px;
+ }
+
+</style>
+
 </html>
