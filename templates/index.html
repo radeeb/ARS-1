@@ -3,11 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>ARS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-    <div>
-        <p> WELCOME TO ARS</p>
+<div class="container-fluid bg-3 text-center">
+    <h3> ARS HOME</h3>
+    <div class="row">
+        <div class="col-sm-4">
+            <p> NEWS WEBSITE</p>
+            <a href="{{ url_for('viewNews') }}"><img src="http://blog.thebrickfactory.com/design/images/nyt.gif" alt="Image"></a>
+        </div>
+        <div class="col-sm-4">
+            <p> ADMIN REPORT</p>
+            <a href="{{ url_for('report') }}"><img src="https://marketingland.com/wp-content/ml-loads/2014/11/analytics-ss-1920-800x450.jpg" alt="Image"></a>
+        </div>
+        <div class="col-sm-4">
+            <p> CLIENT REPORT </p>
+            <a href="{{ url_for('report') }}"><img src="https://tips4working.files.wordpress.com/2016/10/report1.jpg" alt="Image"></a>
+        </div>
     </div>
+</div>
 </body>
+
+<style>
+    img {
+    max-height: 250px;
+    max-width: 250px;
+    }
+</style>
 </html>

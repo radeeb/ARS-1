@@ -1,6 +1,6 @@
 # --------------------------------Imports---------------------------------------
 from flask import Flask, render_template, request
-from database.schema import *
+from database.schema import Base
 from database.api import Database
 import os, json
 import modules.keywordFinder.keyword_finder as kwf
@@ -17,16 +17,10 @@ app.config.update(dict(
     SECRET_KEY="a722c63db8ec8625af6cf71cb8c2d939"))
 
 # Setup the database
-Base.init_app(app)  # bind the database instance to this application
+Base.init_app(app)        # bind the database instance to this application
 app.app_context().push()  # useful when you have more than 1 flask app
-Base.create_all()  # create all the tables
+Base.create_all()         # create all the tables
 DB = Database(Base)
-
-try:
-    if (Page.query.first() == None):
-        DB.insert_page("/news", [1, 5, 8])
-except Exception as e:
-    print(e)
 # ------------------------------------------------------------------------------
 
 
@@ -42,16 +36,35 @@ def index():
 def viewNews():
     site = "news.html"
     return render_template(site)
+    
+# Route for our local world news
+@app.route("/worldNews", methods=["GET"])
+def viewWorldNews():
+    site = "worldNews.html"
+    return render_template(site)
+    
+# Route for our local sports website
+@app.route("/sports", methods=["GET"])
+def viewSports():
+    site = "sports.html"
+    return render_template(site)
 
 
 @app.route("/visit", methods=["POST"])
 def visit():
     response = "You visited an ARS website!"
-    # load the data then put in database
-    data = json.loads(request.data)  # decoding JSON to dictionary
+    # Decode JSON into dictionary
+    data = json.loads(request.data)
+    # Store the page 
+    DB.insert_page(data["url"], [1, 5, 8])
+    # Store the page visit
     DB.insert_webpage_visit(data["url"], data["activeRatio"], data["focusRatio"])
+    # Store the keywords
+    # ********* THE ARGUMENT NEEDS TO BE REPLACED WITH data["url"]
+    store_keywords("www.nytimes.com")
     print("Visit successfully recorded in database")
     return response
+
 
 # Builds a report from the pages in the database
 @app.route("/report", methods=["GET"])
@@ -67,9 +80,9 @@ def report():
 
 
 # --------------------------------Functions/Classes-----------------------------
-keys = kwf.getKeys("localhost:8080/news")
-print(keys)
-#DB.update_keywords("/news", keys)
+def store_keywords(url):
+    keywords = kwf.getKeys(url)
+    DB.insert_keywords(url, keywords)
 
 # ------------------------------------------------------------------------------
 

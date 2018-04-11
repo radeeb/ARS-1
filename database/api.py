@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from database.schema import Page, WebsiteVisits
+from database.schema import *
 import json
 
 
@@ -15,15 +15,16 @@ class Database:
 
     # -------------------- Page --------------------------------
     def insert_page(self, url, locations):  # location is a list of possible ad locations
-        # owner of the website uses this
-        self.base.session.add(Page(
-            url=url,
-            rank=1,
-            locations=json.dumps(locations),
-            avgActiveRatio=0,  # default
-            avgFocusRatio=0  # default
-        ))
-        self.base.session.commit()
+        if (Page.query.get(url) == None):
+            # owner of the website uses this
+            self.base.session.add(Page(
+                url=url,
+                rank=1,
+                locations=json.dumps(locations),
+                avgActiveRatio=0,  # default
+                avgFocusRatio=0  # default
+            ))
+            self.base.session.commit()
 
     def get_all_pages(self):
         return self.base.session.query(Page).all()
@@ -50,8 +51,11 @@ class Database:
 
         self.base.session.commit()
 
-    def update_keywords(self, url, keywords):
-        # Insert the web page visit
-        page = Page.query.get(url)
-        page.keywords = keywords
+    # -------------------- PageKeywords ---------------------
+    def insert_keywords(self, url, keywords):
+        for kw in keywords:
+            if len(PageKeyword.query.filter_by(keyword=kw, page_url=url).all()) == 0: 
+                self.base.session.add(PageKeyword(keyword=kw, 
+                                                  page_url=url))
         self.base.session.commit()
+
