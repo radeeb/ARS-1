@@ -29,6 +29,9 @@ class Database:
     def get_all_pages(self):
         return self.base.session.query(Page).all()
 
+    def get_page(self, url):
+        return self.base.session.query(Page).get(url)
+
 
     # -------------------- WebpageVisits --------------------
     def insert_webpage_visit(self, url, activeRatio, focusRatio):
@@ -50,6 +53,9 @@ class Database:
         page.avgFocusRatio = focusRatios / len(visits)
 
         self.base.session.commit()
+
+    def get_webpage_visits(self, url):
+        return self.base.session.query(WebsiteVisits).filter_by(url=url).all()
 
     # -------------------- PageKeywords ---------------------
     def insert_keywords(self, url, keywords):

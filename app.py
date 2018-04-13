@@ -75,15 +75,29 @@ def report():
                     ActiveRatio=page.avgActiveRatio, 
                     FocusRatio=page.avgFocusRatio, 
                     Locations=page.locations) for page in pages]
+    # price("/news", 200)
     return render_template("report.html", Reports=Reports)
 # ------------------------------------------------------------------------------
 
 
 # --------------------------------Functions/Classes-----------------------------
+# Stores the keywords on a given url in the DB
 def store_keywords(url):
     keywords = kwf.getKeys(url)
     DB.insert_keywords(url, keywords)
 
+# Engagement index for a specific page
+def engagement_index(url):
+    num_visits = len(DB.get_webpage_visits(url))
+    page = DB.get_page(url)
+    eng_index = (page.avgActiveRatio + page.avgFocusRatio) / 2
+    return(eng_index)
+
+# Price based on engagement index
+def price(url, max_price):
+    EI = engagement_index(url)
+    price = max_price * EI / 100
+    return price
 # ------------------------------------------------------------------------------
 
 
