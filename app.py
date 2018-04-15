@@ -60,8 +60,7 @@ def visit():
     # Store the page visit
     DB.insert_webpage_visit(data["url"], data["activeRatio"], data["focusRatio"])
     # Store the keywords
-    # ********* THE ARGUMENT NEEDS TO BE REPLACED WITH data["url"]
-    store_keywords("www.nytimes.com")
+    # store_keywords(data["url"])
     print("Visit successfully recorded in database")
     return response
 
@@ -75,13 +74,12 @@ def report():
                     ActiveRatio=page.avgActiveRatio, 
                     FocusRatio=page.avgFocusRatio, 
                     Locations=page.locations) for page in pages]
-    # price("/news", 200)
     return render_template("report.html", Reports=Reports)
 # ------------------------------------------------------------------------------
 
 
 # --------------------------------Functions/Classes-----------------------------
-# Stores the keywords on a given url in the DB
+# Stores the keywords found on a given url in the DB
 def store_keywords(url):
     keywords = kwf.getKeys(url)
     DB.insert_keywords(url, keywords)

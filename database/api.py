@@ -58,7 +58,7 @@ class Database:
         return self.base.session.query(WebsiteVisits).filter_by(url=url).all()
 
 
-    # -------------------- PageKeywords ---------------------
+    # -------------------- PageKeyword ---------------------
     def insert_keywords(self, url, keywords):
         for kw in keywords:
             if len(PageKeyword.query.filter_by(keyword=kw, page_url=url).all()) == 0: 
@@ -66,3 +66,7 @@ class Database:
                                                   page_url=url))
         self.base.session.commit()
 
+    # Returns a list of pages that a keyword is found on
+    def get_pages_from_kw(self, kw):
+        pages = self.base.session.query(PageKeyword).filter_by(keyword=kw).all()
+        return [page.page_url for page in pages]
