@@ -41,7 +41,7 @@ class Database:
             activeRatio=activeRatio,
             url=url))
 
-        # Update average focus/active ratio for this Page
+        # Update average focus/active ratio everytime a new visti
         visits = WebsiteVisits.query.filter_by(url=url).all()
         activeRatios = 0
         focusRatios = 0
@@ -56,6 +56,7 @@ class Database:
 
     def get_webpage_visits(self, url):
         return self.base.session.query(WebsiteVisits).filter_by(url=url).all()
+
 
     # -------------------- PageKeywords ---------------------
     def insert_keywords(self, url, keywords):
