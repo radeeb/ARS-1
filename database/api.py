@@ -1,4 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
 from database.schema import *
 import json
 
@@ -12,10 +11,9 @@ class Database:
     def close(self):
         self.base.session.remove()
 
-
     # -------------------- Page --------------------------------
     def insert_page(self, url, locations):  # location is a list of possible ad locations
-        if (Page.query.get(url) == None):
+        if Page.query.get(url) is None:
             # owner of the website uses this
             self.base.session.add(Page(
                 url=url,
@@ -32,7 +30,6 @@ class Database:
     def get_page(self, url):
         return self.base.session.query(Page).get(url)
 
-
     # -------------------- WebpageVisits --------------------
     def insert_webpage_visit(self, url, activeRatio, focusRatio):
         # Insert the web page visit
@@ -46,8 +43,9 @@ class Database:
         activeRatios = 0
         focusRatios = 0
         for visit in visits:
-            activeRatios += visit.activeRatio
-            focusRatios += visit.focusRatio
+            if visit.activeRatio is not None and visit.focusRatio is not None:
+                activeRatios += visit.activeRatio
+                focusRatios += visit.focusRatio
         page = Page.query.get(url)
         page.avgActiveRatio = activeRatios / len(visits)
         page.avgFocusRatio = focusRatios / len(visits)
@@ -57,12 +55,11 @@ class Database:
     def get_webpage_visits(self, url):
         return self.base.session.query(WebsiteVisits).filter_by(url=url).all()
 
-
     # -------------------- PageKeyword ---------------------
     def insert_keywords(self, url, keywords):
         for kw in keywords:
-            if len(PageKeyword.query.filter_by(keyword=kw, page_url=url).all()) == 0: 
-                self.base.session.add(PageKeyword(keyword=kw, 
+            if len(PageKeyword.query.filter_by(keyword=kw, page_url=url).all()) == 0:
+                self.base.session.add(PageKeyword(keyword=kw,
                                                   page_url=url))
         self.base.session.commit()
 

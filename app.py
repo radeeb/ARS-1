@@ -4,6 +4,7 @@ from database.schema import Base
 from database.api import Database
 import os, json
 import modules.keywordFinder.keyword_finder as kwf
+
 # ------------------------------------------------------------------------------
 
 
@@ -17,10 +18,12 @@ app.config.update(dict(
     SECRET_KEY="a722c63db8ec8625af6cf71cb8c2d939"))
 
 # Setup the database
-Base.init_app(app)        # bind the database instance to this application
+Base.init_app(app)  # bind the database instance to this application
 app.app_context().push()  # useful when you have more than 1 flask app
-Base.create_all()         # create all the tables
+Base.create_all()  # create all the tables
 DB = Database(Base)
+
+
 # ------------------------------------------------------------------------------
 
 
@@ -36,13 +39,15 @@ def index():
 def viewNews():
     site = "news.html"
     return render_template(site)
-    
+
+
 # Route for our local world news
 @app.route("/worldNews", methods=["GET"])
 def viewWorldNews():
     site = "worldNews.html"
     return render_template(site)
-    
+
+
 # Route for our local sports website
 @app.route("/sports", methods=["GET"])
 def viewSports():
@@ -60,7 +65,7 @@ def visit():
     # Store the page visit
     DB.insert_webpage_visit(data["url"], data["activeRatio"], data["focusRatio"])
     # Store the keywords
-    # store_keywords(data["url"])
+    store_keywords("http://localhost:8080" + data["url"])
     print("Visit successfully recorded in database")
     return response
 
@@ -69,12 +74,14 @@ def visit():
 @app.route("/report", methods=["GET"])
 def report():
     pages = DB.get_all_pages()
-    Reports = [dict(URL=page.url, 
-                    Rank=page.rank, 
-                    ActiveRatio=page.avgActiveRatio, 
-                    FocusRatio=page.avgFocusRatio, 
+    reports = [dict(URL=page.url,
+                    Rank=page.rank,
+                    ActiveRatio=page.avgActiveRatio,
+                    FocusRatio=page.avgFocusRatio,
                     Locations=page.locations) for page in pages]
-    return render_template("report.html", Reports=Reports)
+    return render_template("report.html", Reports=reports)
+
+
 # ------------------------------------------------------------------------------
 
 
@@ -84,23 +91,26 @@ def store_keywords(url):
     keywords = kwf.getKeys(url)
     DB.insert_keywords(url, keywords)
 
+
 # Engagement index for a specific page
 def engagement_index(url):
     num_visits = len(DB.get_webpage_visits(url))
     page = DB.get_page(url)
     eng_index = (page.avgActiveRatio + page.avgFocusRatio) / 2
-    return(eng_index)
+    return (eng_index)
+
 
 # Price based on engagement index
 def price(url, max_price):
     EI = engagement_index(url)
     price = max_price * EI / 100
     return price
+
+
 # ------------------------------------------------------------------------------
 
 
-
 # --------------------------------Program Main----------------------------------
-if (__name__ == "__main__"):
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=localPort)
 # ------------------------------------------------------------------------------
