@@ -24,7 +24,9 @@ def getKeys(website):
 
     response = urllib.request.urlopen(website).read()
     soup = BeautifulSoup(response, "html.parser")
-
+    #deletes the reference, urllib cleans up after itself when there is no reference
+    del response
+    
     divs = soup.body.find_all("div")  # list of all div tags in html
 
     # find the <div> with the most <p> tags. Main algorithm in method

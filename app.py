@@ -88,8 +88,11 @@ def report():
 # --------------------------------Functions/Classes-----------------------------
 # Stores the keywords found on a given url in the DB
 def store_keywords(url):
+    print(DB.get_page(url), "\t", DB.get_page(url))
     keywords = kwf.getKeys(url)
     DB.insert_keywords(url, keywords)
+    #for key in keywords:
+    #    print(key)
 
 
 # Engagement index for a specific page
@@ -112,5 +115,5 @@ def price(url, max_price):
 
 # --------------------------------Program Main----------------------------------
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=localPort)
+    app.run(host="0.0.0.0", port=localPort, threaded=True)
 # ------------------------------------------------------------------------------
