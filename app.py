@@ -69,7 +69,7 @@ def visit():
     # Store the page visit
     DB.insert_page_visit(data["url"], data["activeRatio"], data["focusRatio"], data["visitTime"])
     # Store the keywords
-    store_keywords("http://localhost:8080" + data["url"])
+    store_keywords(data["url"])
     print("Visit successfully recorded in database")
     return response
 
@@ -97,28 +97,38 @@ def customerReport():
                     Locations=page.locations) for page in pages]
     return render_template("customerReport.html", Reports=reports)
 
+
 @app.route("/search", methods=['GET', 'POST'])
 def search():
-	search= keywordSearch(request.form)
-	if request.method == 'POST':
-		return(search_results(search))
-	return render_template("search.html", form=search)
-	
+    search = keywordSearch(request.form)
+    if request.method == 'POST':
+        return (search_results(search))
+    return render_template("search.html", form=search)
+
+
 @app.route("/results")
 def search_results(search):
     search_string = search.data['search']
     if search.data['search'] == '':
-        results = DB.get_all_pages()
-        found = [dict(URL=result.url, Rank=result.rank, ActiveRatio=result.avgActiveRatio, FocusRatio=result.avgFocusRatio, Locations=result.locations) for result in results]
+        flash('Please enter a valid keyword')
 
-    #Sends entered data to search function in api.py and either returns a report with returned values or flashes no results found.
+    # Sends entered data to search function in api.py and either returns a report with returned values or flashes no
+    # results found.
     else:
-        results = DB.get_results(search_string)
-        found = [dict(URL=result.url, Rank=result.rank, ActiveRatio=result.avgActiveRatio, FocusRatio=result.avgFocusRatio, Locations=result.locations) for result in results]
+        print("kw: ", search_string)
+        page_urls = DB.get_pages_from_kw(search_string)
+        print("urls: ", page_urls)
+        pages = [DB.get_page(page) for page in page_urls]
+        print("page objects :", pages)
+        print("object url :", pages[0].url)
+        found = [
+            dict(URL=page.url, Rank=page.rank, ActiveRatio=page.avgActiveRatio, FocusRatio=page.avgFocusRatio,
+                 Locations=page.locations) for page in pages]
         if len(found) == 0:
             flash('No results found!')
             return redirect('/search')
     return render_template("results.html", table=found)
+
 
 # ------------------------------------------------------------------------------
 
@@ -126,7 +136,7 @@ def search_results(search):
 # --------------------------------Functions/Classes-----------------------------
 # Stores the keywords found on a given url in the DB
 def store_keywords(url):
-    keywords = kwf.getKeys(url)
+    keywords = kwf.getKeys("http://localhost:8080" + url)
     DB.insert_keywords(url, keywords)
 
 
@@ -149,6 +159,7 @@ def ad_price(url, max_price, min_price):
         price = min_price
     price = format(price, '.2f')
     return price
+
 
 # ------------------------------------------------------------------------------
 
