@@ -330,7 +330,7 @@ var riveted = (function () {
         var visiableTime = visitTime - hiddenTime;
         var fR = Math.floor((visiableTime / visitTime) * 100);
 
-        var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR};
+        var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR, "visitTime": visiableTime};
 
         outputData = JSON.stringify(outputData);
         console.log(outputData);

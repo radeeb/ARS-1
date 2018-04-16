@@ -63,24 +63,34 @@ def visit():
     # Store the page 
     DB.insert_page(data["url"], [1, 5, 8])
     # Store the page visit
-    DB.insert_webpage_visit(data["url"], data["activeRatio"], data["focusRatio"])
+    DB.insert_webpage_visit(data["url"], data["activeRatio"], data["focusRatio"], data["visitTime"])
     # Store the keywords
     store_keywords("http://localhost:8080" + data["url"])
     print("Visit successfully recorded in database")
     return response
 
-
 # Builds a report from the pages in the database
-@app.route("/report", methods=["GET"])
-def report():
+@app.route("/adminReport", methods=["GET"])
+def adminReport():
     pages = DB.get_all_pages()
-    reports = [dict(URL=page.url,
-                    Rank=page.rank,
-                    ActiveRatio=page.avgActiveRatio,
-                    FocusRatio=page.avgFocusRatio,
+    Reports = [dict(URL=page.url, 
+                    Rank=page.rank, 
+                    ActiveRatio=page.avgActiveRatio, 
+                    FocusRatio=page.avgFocusRatio, 
+                    visitTime=page.avgVisitTime,
+                    numberOfVisits=len(DB.get_webpage_visits(page.url)),
                     Locations=page.locations) for page in pages]
-    return render_template("report.html", Reports=reports)
-
+    # price("/news", 200)
+    return render_template("adminReport.html", Reports=Reports)
+	
+# Builds a report from the pages in the database
+@app.route("/customerReport", methods=["GET"])
+def customerReport():
+    pages = DB.get_all_pages()
+    Reports = [dict(URL=page.url, 
+                    Price= price(page.url, 200, 1),
+                    Locations=page.locations) for page in pages]
+    return render_template("customerReport.html", Reports=Reports)
 
 # ------------------------------------------------------------------------------
 
@@ -98,14 +108,20 @@ def store_keywords(url):
 def engagement_index(url):
     num_visits = len(DB.get_webpage_visits(url))
     page = DB.get_page(url)
-    eng_index = (page.avgActiveRatio + page.avgFocusRatio) / 2
-    return (eng_index)
+    eng_index = (page.avgVisitTime/60) * num_visits * (page.avgActiveRatio/100) * (page.avgFocusRatio/100)
+    return(eng_index)
 
 
 # Price based on engagement index
-def price(url, max_price):
+def price(url, max_price, min_price):
     EI = engagement_index(url)
     price = max_price * EI / 100
+    price = round(price, 2)
+    if price > max_price:
+        price = max_price
+    elif price < min_price:
+        price = min_price
+    price = format(price, '.2f')
     return price
 
 

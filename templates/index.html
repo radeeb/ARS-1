@@ -17,8 +17,8 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">HOME</a></li>
                 <li><a href="{{ url_for('viewNews') }}">NEWS</a></li>
-                <li><a href="{{ url_for('report') }}">ADMIN REPORT</a></li>
-                <li><a href="{{ url_for('report') }}">CLIENT REPORT</a></li>
+                <li><a href="{{ url_for('adminReport') }}">ADMIN REPORT</a></li>
+                <li><a href="{{ url_for('customerReport') }}">CLIENT REPORT</a></li>
             </ul>
         </div>
     </nav>
@@ -30,11 +30,11 @@
         </div>
         <div class="col-sm-4">
             <h3> ADMIN REPORT</h3>
-            <a href="{{ url_for('report') }}"><img src="https://marketingland.com/wp-content/ml-loads/2014/11/analytics-ss-1920-800x450.jpg" alt="Image"></a>
+            <a href="{{ url_for('adminReport') }}"><img src="https://marketingland.com/wp-content/ml-loads/2014/11/analytics-ss-1920-800x450.jpg" alt="Image"></a>
         </div>
         <div class="col-sm-4">
             <h3> CLIENT REPORT </h3>
-            <a href="{{ url_for('report') }}"><img src="https://tips4working.files.wordpress.com/2016/10/report1.jpg" alt="Image"></a>
+            <a href="{{ url_for('customerReport') }}"><img src="https://tips4working.files.wordpress.com/2016/10/report1.jpg" alt="Image"></a>
         </div>
     </div>
 </div>

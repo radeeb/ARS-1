@@ -20,7 +20,8 @@ class Database:
                 rank=1,
                 locations=json.dumps(locations),
                 avgActiveRatio=0,  # default
-                avgFocusRatio=0  # default
+                avgFocusRatio=0,  # default
+                avgVisitTime=0 # default
             ))
             self.base.session.commit()
 
@@ -31,24 +32,28 @@ class Database:
         return self.base.session.query(Page).get(url)
 
     # -------------------- WebpageVisits --------------------
-    def insert_webpage_visit(self, url, activeRatio, focusRatio):
+    def insert_webpage_visit(self, url, activeRatio, focusRatio, visitTime):
         # Insert the web page visit
         self.base.session.add(WebsiteVisits(
             focusRatio=focusRatio,
             activeRatio=activeRatio,
+            visitTime=visitTime,
             url=url))
 
         # Update average focus/active ratio everytime a new visti
         visits = WebsiteVisits.query.filter_by(url=url).all()
         activeRatios = 0
         focusRatios = 0
+        visitTimes = 0
         for visit in visits:
             if visit.activeRatio is not None and visit.focusRatio is not None:
                 activeRatios += visit.activeRatio
                 focusRatios += visit.focusRatio
+                visitTimes += visit.visitTime
         page = Page.query.get(url)
         page.avgActiveRatio = activeRatios / len(visits)
         page.avgFocusRatio = focusRatios / len(visits)
+        page.avgVisitTime = visitTimes / len(visits)
 
         self.base.session.commit()
 
