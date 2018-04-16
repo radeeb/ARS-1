@@ -13,6 +13,9 @@ from database.schema import Base
 
 
 # --------------------------------Application setup-----------------------------
+MIN_PRICE = 1
+MAX_PRICE = 200
+
 app = Flask(__name__)
 localPort = 8080
 app.config.from_object(__name__)
@@ -26,8 +29,6 @@ Base.init_app(app)  # bind the database instance to this application
 app.app_context().push()  # useful when you have more than 1 flask app
 Base.create_all()  # create all the tables
 DB = Database(Base)
-
-
 # ------------------------------------------------------------------------------
 
 
@@ -93,7 +94,7 @@ def adminReport():
 def customerReport():
     pages = DB.get_all_pages()
     reports = [dict(URL=page.url,
-                    Price=ad_price(page.url, 200, 1),
+                    Price=ad_price(page.url),
                     Locations=page.locations) for page in pages]
     return render_template("customerReport.html", Reports=reports)
 
@@ -111,19 +112,16 @@ def search_results(search):
     search_string = search.data['search']
     if search.data['search'] == '':
         flash('Please enter a valid keyword')
+        return redirect('/search')
 
     # Sends entered data to search function in api.py and either returns a report with returned values or flashes no
     # results found.
     else:
-        print("kw: ", search_string)
         page_urls = DB.get_pages_from_kw(search_string)
-        print("urls: ", page_urls)
         pages = [DB.get_page(page) for page in page_urls]
-        print("page objects :", pages)
-        print("object url :", pages[0].url)
         found = [
             dict(URL=page.url, Rank=page.rank, ActiveRatio=page.avgActiveRatio, FocusRatio=page.avgFocusRatio,
-                 Locations=page.locations) for page in pages]
+                 Locations=page.locations, Price=ad_price(page.url)) for page in pages]
         if len(found) == 0:
             flash('No results found!')
             return redirect('/search')
@@ -149,14 +147,14 @@ def engagement_index(url):
 
 
 # Price based on engagement index
-def ad_price(url, max_price, min_price):
+def ad_price(url):
     EI = engagement_index(url)
-    price = max_price * EI / 100
+    price = MAX_PRICE * EI / 100
     price = round(price, 2)
-    if price > max_price:
-        price = max_price
-    elif price < min_price:
-        price = min_price
+    if price > MAX_PRICE:
+        price = MAX_PRICE
+    elif price < MIN_PRICE:
+        price = MIN_PRICE
     price = format(price, '.2f')
     return price
 

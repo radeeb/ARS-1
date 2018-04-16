@@ -19,9 +19,9 @@ class Database:
                 url=url,
                 rank=1,
                 locations=json.dumps(locations),
-                avgActiveRatio=0,  # default
-                avgFocusRatio=0,  # default
-                avgVisitTime=0  # default
+                avgActiveRatio=0,
+                avgFocusRatio=0,
+                avgVisitTime=0
             ))
             self.base.session.commit()
 
