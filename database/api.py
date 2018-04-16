@@ -30,6 +30,10 @@ class Database:
 
     def get_page(self, url):
         return self.base.session.query(Page).get(url)
+    
+    #Searches database for url that was given in the search bar
+    def get_results(self, keyword):
+        return self.base.session.query(Page).filter_by(url = keyword)
 
     # -------------------- PageVisit --------------------
     def insert_page_visit(self, url, activeRatio, focusRatio, visitTime):
