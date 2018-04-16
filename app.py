@@ -3,6 +3,7 @@ import json
 import os
 
 from flask import Flask, flash, redirect, render_template, request
+from forms import keywordSearch
 
 import modules.keywordFinder.keyword_finder as kwf
 from database.api import Database
