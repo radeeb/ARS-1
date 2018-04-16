@@ -2,7 +2,8 @@
 import json
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask, flash, redirect, render_template, request
+from forms import keywordSearch
 
 import modules.keywordFinder.keyword_finder as kwf
 from database.api import Database
@@ -96,6 +97,28 @@ def customerReport():
                     Locations=page.locations) for page in pages]
     return render_template("customerReport.html", Reports=reports)
 
+@app.route("/search", methods=['GET', 'POST'])
+def search():
+	search= keywordSearch(request.form)
+	if request.method == 'POST':
+		return(search_results(search))
+	return render_template("search.html", form=search)
+	
+@app.route("/results")
+def search_results(search):
+    search_string = search.data['search']
+    if search.data['search'] == '':
+        results = DB.get_all_pages()
+        found = [dict(URL=result.url, Rank=result.rank, ActiveRatio=result.avgActiveRatio, FocusRatio=result.avgFocusRatio, Locations=result.locations) for result in results]
+
+    #Sends entered data to search function in api.py and either returns a report with returned values or flashes no results found.
+    else:
+        results = DB.get_results(search_string)
+        found = [dict(URL=result.url, Rank=result.rank, ActiveRatio=result.avgActiveRatio, FocusRatio=result.avgFocusRatio, Locations=result.locations) for result in results]
+        if len(found) == 0:
+            flash('No results found!')
+            return redirect('/search')
+    return render_template("results.html", table=found)
 
 # ------------------------------------------------------------------------------
 

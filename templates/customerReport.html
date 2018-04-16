@@ -9,7 +9,6 @@
 
 	<head>
 		<link rel="stylesheet" a href="../static/css/report_design.css"></a>
-		<script type="text/javascript" a src="../static/js/Search.js"></a></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
@@ -26,13 +25,11 @@
                 <li><a href="{{ url_for('viewNews') }}">NEWS</a></li>
                 <li class="active"><a href="{{ url_for('adminReport') }}">ADMIN REPORT</a></li>
                 <li><a href="{{ url_for('customerReport') }}">CLIENT REPORT</a></li>
+		<li><a href="{{url_for('search') }}">SEARCH</a></li>
             </ul>
         </div>
     </nav>
 		<h1> Recommended Advertisement Spaces </h1>
-		
-		<!--Search bar for search javascript. Is not fully implemented with newly created table.-->
-		<input type="text" id="myInput" onkeyup="keywordSearch()" placeholder="Search for keywords..">
 		
 			<!--Loops through database and inserts given values into assigned rows of the table-->
 			<table id="databaseresults">
