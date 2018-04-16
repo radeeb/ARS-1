@@ -8,8 +8,7 @@
 
 
 <head>
-    <link rel="stylesheet" a href="../static/css/report_design.css">
-    </a>
+    <link rel="stylesheet" href="../static/css/report_design.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -37,10 +36,6 @@
     <thead>
     <tr>
         <th>URL</th>
-        <th>Rank</th>
-        <th>ActiveRatio</th>
-        <th>FocusRatio</th>
-        <th>Locations</th>
         <th>Price</th>
     </tr>
     </thead>
@@ -48,10 +43,6 @@
     {% for row in table %}
         <tr>
             <td>{{ row.URL }}</td>
-            <td>{{ row.Rank }}</td>
-            <td>{{ row.ActiveRatio }}</td>
-            <td>{{ row.FocusRatio }}</td>
-            <td>{{ row.Locations }}</td>
             <td>${{ row.Price }}</td>
         </tr>
     {% endfor %}

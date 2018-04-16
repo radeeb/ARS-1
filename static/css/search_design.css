@@ -1,21 +1,20 @@
 /* Design elements for the search page*/
 
-h2{text-align:center;}
-
-form
-{
-    text-align:center;
+h1 {
+    text-align: center;
+    color: #4CAF50;
 }
 
-p
-{
-    text-align:center;
-    font-size:18;
-    font-style: italic;
+form {
+    text-align: center;
 }
 
-.flashes
-{
-    text-align:center;
-    font-size: 14px;
+.flash {
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 40%;
+    text-align: center;
+    background: #4CAF50;
+    padding: 0.25em;
+    border: 1px solid #000000;
 }

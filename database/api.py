@@ -12,13 +12,11 @@ class Database:
         self.base.session.remove()
 
     # -------------------- Page --------------------------------
-    def insert_page(self, url, locations):  # location is a list of possible ad locations
+    def insert_page(self, url):
         if Page.query.get(url) is None:
             # owner of the website uses this
             self.base.session.add(Page(
                 url=url,
-                rank=1,
-                locations=json.dumps(locations),
                 avgActiveRatio=0,
                 avgFocusRatio=0,
                 avgVisitTime=0

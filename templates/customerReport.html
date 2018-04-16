@@ -7,48 +7,48 @@
 <html>
 
 
-	<head>
-		<link rel="stylesheet" a href="../static/css/report_design.css"></a>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</head>
-	
-	<body>
+<head>
+    <link rel="stylesheet" href="../static/css/report_design.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
-	<nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">ARS NAVIGATION</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('index') }}">HOME</a></li>
-                <li><a href="{{ url_for('viewNews') }}">NEWS</a></li>
-                <li class="active"><a href="{{ url_for('adminReport') }}">ADMIN REPORT</a></li>
-                <li><a href="{{ url_for('customerReport') }}">CLIENT REPORT</a></li>
-		<li><a href="{{url_for('search') }}">SEARCH</a></li>
-            </ul>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">ARS NAVIGATION</a>
         </div>
-    </nav>
-		<h1> Recommended Advertisement Spaces </h1>
-		
-			<!--Loops through database and inserts given values into assigned rows of the table-->
-			<table id="databaseresults">
-				<thead>
-					<tr>
-						<th>URL</th>
-						<th>Price</th>
-						<th>Locations</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for row in Reports %}
-				<tr>
-					<td>{{row.URL}}</td>
-					<td>${{row.Price}}</td>
-					<td>{{row.Locations}}</td>
-				</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-	</body>
+        <ul class="nav navbar-nav">
+            <li><a href="{{ url_for('index') }}">HOME</a></li>
+            <li><a href="{{ url_for('viewNews') }}">NEWS</a></li>
+            <li><a href="{{ url_for('adminReport') }}">ADMIN REPORT</a></li>
+            <li class="active"><a href="{{ url_for('customerReport') }}">CUSTOMER REPORT</a></li>
+            <li><a href="{{ url_for('search') }}">SEARCH</a></li>
+        </ul>
+    </div>
+</nav>
+
+<h1> Customer Report </h1>
+
+<!--Loops through database and inserts given values into assigned rows of the table-->
+<table id="databaseresults">
+    <thead>
+    <tr>
+        <th>URL</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in Reports %}
+        <tr>
+            <td>{{ row.URL }}</td>
+            <td>${{ row.Price }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+</body>
 </html>

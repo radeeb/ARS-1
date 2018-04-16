@@ -8,11 +8,9 @@ Base = SQLAlchemy()
 
 class Page(Base.Model):
     url = Base.Column(Base.String(100), primary_key=True)
-    rank = Base.Column(Base.Integer)
     avgActiveRatio = Base.Column(Base.Float(precision='3,2'))  # averaged active ratio avg of all website visits
     avgFocusRatio = Base.Column(Base.Float(precision='3,2'))  # averaged focus ratio avg of all website visits
     avgVisitTime = Base.Column(Base.Float(precision='3,2')) # averaged visit time avg of all website visits
-    locations = Base.Column(Base.Text)  # list of ad locations
     visits = Base.relationship('PageVisit', backref="page",
                                lazy="dynamic")  # one to many relationship with website visits
 
