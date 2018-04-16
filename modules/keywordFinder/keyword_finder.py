@@ -124,6 +124,6 @@ def getKeyWords(words, ignoreList):
 
 
 def readFile(input_filename):
-    with open(input_filename, 'r') as array_file:
+    with open(input_filename, 'r', encoding="utf-8") as array_file:
         array_data = [str(val) for val in array_file.read().split()]
     return array_data
