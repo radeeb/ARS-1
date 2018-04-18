@@ -157,8 +157,11 @@ def ad_price(url):
     price = format(price, '.2f')
     return price
 
+
 class keywordSearch(Form):
     search = StringField('Enter keyword:', '')
+
+
 # ------------------------------------------------------------------------------
 
 

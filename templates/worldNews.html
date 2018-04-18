@@ -1,34 +1,38 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>The News Reporter</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/responsive.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.bxslider.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.bxslider.css') }}">
 
     <!--Global site tag for google analytics-->
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-19410358-6"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments)};
+
+        function gtag() {
+            dataLayer.push(arguments)
+        };
         gtag('js', new Date());
 
         gtag('config', 'UA-19410358-6');
     </script>
 
-	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.bxslider.js') }}"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='js/riveted.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.bxslider.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/riveted.js') }}"></script>
 
     <!--call Riveted function-->
     <script>
@@ -37,92 +41,109 @@
 </head>
 
 
-
 <body>
 <div class="body_wrapper">
-  <div class="center">
-    <div class="header_area">
-      <div class="logo floatleft"><a href="#"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></a></div>
-      <div class="top_menu floatleft">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact us</a></li>
-          <li><a href="#">Subscribe</a></li>
-          <li><a href="#">Login</a></li>
-        </ul>
-      </div>
-      <div class="social_plus_search floatright">
-        <div class="social">
-          <ul>
-            <li><a href="#" class="twitter"></a></li>
-            <li><a href="#" class="facebook"></a></li>
-            <li><a href="#" class="feed"></a></li>
-          </ul>
+    <div class="center">
+        <div class="header_area">
+            <div class="logo floatleft"><a href="#"><img src="{{ url_for('static', filename='images/logo.png') }}"
+                                                         alt=""/></a></div>
+            <div class="top_menu floatleft">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Subscribe</a></li>
+                    <li><a href="#">Login</a></li>
+                </ul>
+            </div>
+            <div class="social_plus_search floatright">
+                <div class="social">
+                    <ul>
+                        <li><a href="#" class="twitter"></a></li>
+                        <li><a href="#" class="facebook"></a></li>
+                        <li><a href="#" class="feed"></a></li>
+                    </ul>
+                </div>
+                <div class="search">
+                    <form action="#" method="post" id="search_form">
+                        <input type="text" value="Search news" id="s"/>
+                        <input type="submit" id="searchform" value="search"/>
+                        <input type="hidden" value="post" name="post_type"/>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="search">
-          <form action="#" method="post" id="search_form">
-            <input type="text" value="Search news" id="s" />
-            <input type="submit" id="searchform" value="search" />
-            <input type="hidden" value="post" name="post_type" />
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="main_menu_area">
+        <div class="main_menu_area">
             <ul id="nav">
                 <li><a href="{{ url_for('viewNews') }}">Home</a></li>
                 <li><a href="{{ url_for('viewSports') }}">Sports</a></li>
                 <li><a href="{{ url_for('viewWorldNews') }}">World News</a></li>
             </ul>
         </div>
-	<h2 class="title">World News</h2>
-	<h3 id ="header">World largest dinisaur found in Scottland</h3>
-	<p id="article">Rare dinosaur footprints belonging to the largest animal to ever roam the planet have been found in Scotland.
-Dozens of the 170 million-year-old fossils, belonging to early sauropods, have been unearthed in a muddy lagoon on the isle of Skye.
-Sauropods grew to be at least 49ft (15 metres) long and weighed more than 10 tonnes. Footprints from theropods - the "older cousins"
- of Tyrannosaurus rex who stood at two meters tall - were also found. They are thought to be the oldest dinosaur fossils ever found 
- in Scotland. Another set of footprints were also found on Skye in 2015, but are slightly younger and slightly smaller. 
-Geologists say the new finds are important as evidence from the Middle Jurassic period is rare, and few such fossil sites 
-have been found around the world. The discovery adds to growing evidence the prehistoric reptiles were widespread on Skye at a 
-pivotal time in their evolution. It also shows many dinosaurs, far from being restricted to the land, often lived near water and
- would wade through ancient lagoons to find food. Dr Steve Brusatte of Edinburgh University said: "It's important because it's a
- large site for dinosaur tracks, those are pretty hard to find. It shows both long-necked and meat-eaters were on the same site at
- the same time living together, side-by-side. It captures a moment in time 170 million years ago when they were just hanging out in a
- lagoon, living on the beach, back when Scotland was much warmer and dinosaurs were beginning their march to global dominance. Their
- long-necked prints are almost car tyre size whereas the meat-eater ones are about the size of a basket ball." Dr Brusatte added: 
- “The more we look on the Isle of Skye, the more dinosaur footprints we find.
-	</p>
+        <h2 class="title">World News</h2>
+        <h3 id="header">World largest dinisaur found in Scottland</h3>
+        <p id="article">Rare dinosaur footprints belonging to the largest animal to ever roam the planet have been found
+            in Scotland.
+            Dozens of the 170 million-year-old fossils, belonging to early sauropods, have been unearthed in a muddy
+            lagoon on the isle of Skye.
+            Sauropods grew to be at least 49ft (15 metres) long and weighed more than 10 tonnes. Footprints from
+            theropods - the "older cousins"
+            of Tyrannosaurus rex who stood at two meters tall - were also found. They are thought to be the oldest
+            dinosaur fossils ever found
+            in Scotland. Another set of footprints were also found on Skye in 2015, but are slightly younger and
+            slightly smaller.
+            Geologists say the new finds are important as evidence from the Middle Jurassic period is rare, and few such
+            fossil sites
+            have been found around the world. The discovery adds to growing evidence the prehistoric reptiles were
+            widespread on Skye at a
+            pivotal time in their evolution. It also shows many dinosaurs, far from being restricted to the land, often
+            lived near water and
+            would wade through ancient lagoons to find food. Dr Steve Brusatte of Edinburgh University said: "It's
+            important because it's a
+            large site for dinosaur tracks, those are pretty hard to find. It shows both long-necked and meat-eaters
+            were on the same site at
+            the same time living together, side-by-side. It captures a moment in time 170 million years ago when they
+            were just hanging out in a
+            lagoon, living on the beach, back when Scotland was much warmer and dinosaurs were beginning their march to
+            global dominance. Their
+            long-necked prints are almost car tyre size whereas the meat-eater ones are about the size of a basket
+            ball." Dr Brusatte added:
+            “The more we look on the Isle of Skye, the more dinosaur footprints we find.
+        </p>
+    </div>
+    <div id="validators">  <!-- You could keep inside the overallContent div -->
+        <a href="{{ url_for('index') }}"><img
+                src="https://cdn.arstechnica.net/wp-content/themes/arstechnica/assets/images/ars-logo-open-grey.png"
+                alt="Valid HTML5"/></a> <br/>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/selectnav.min.js') }}"></script>
+    <script type="text/javascript">
+        selectnav('nav', {
+            label: '-Navigation-',
+            nested: true,
+            indent: '-'
+        });
+        selectnav('f_menu', {
+            label: '-Navigation-',
+            nested: true,
+            indent: '-'
+        });
+        $('.bxslider').bxSlider({
+            mode: 'fade',
+            captions: true
+        });
+    </script>
 </div>
-<div id = "validators">  <!-- You could keep inside the overallContent div -->
-		<a href="{{ url_for('index') }}"><img src="https://cdn.arstechnica.net/wp-content/themes/arstechnica/assets/images/ars-logo-open-grey.png" alt="Valid HTML5" /></a> <br />
-</div>
-<script type="text/javascript" src="{{ url_for('static', filename='js/selectnav.min.js') }}"></script>
-<script type="text/javascript">
-selectnav('nav', {
-    label: '-Navigation-',
-    nested: true,
-    indent: '-'
-});
-selectnav('f_menu', {
-    label: '-Navigation-',
-    nested: true,
-    indent: '-'
-});
-$('.bxslider').bxSlider({
-    mode: 'fade',
-    captions: true
-});
-</script>
 </body>
+
 <style>
     #validators {
-   position: fixed;
-   left: 20px;
-   top: 20px;
-   height: 100px;
-   width: 100px;
- }
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        height: 100px;
+        width: 100px;
+    }
 
 </style>
 </html>

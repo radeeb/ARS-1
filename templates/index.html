@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>ARS</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/ars_styles.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -12,42 +13,36 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">ARS NAVIGATION</a>
+                <a class="navbar-brand" >ARS</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">HOME</a></li>
-                <li><a href="{{ url_for('viewNews') }}">NEWS</a></li>
-                <li><a href="{{ url_for('adminReport') }}">ADMIN REPORT</a></li>
-                <li><a href="{{ url_for('customerReport') }}">CUSTOMER REPORT</a></li>
-                <li><a href="{{ url_for('search') }}">SEARCH</a></li>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="{{ url_for('viewNews') }}">News</a></li>
+                <li><a href="{{ url_for('adminReport') }}">Admin Report</a></li>
+                <li><a href="{{ url_for('customerReport') }}">Customer Report</a></li>
+                <li><a href="{{ url_for('search') }}">Search</a></li>
             </ul>
         </div>
     </nav>
-    <h1> ARS HOME</h1>
+    <p id="header">ARS HOME</p>
     <div class="row">
         <div class="col-sm-4">
             <h3> NEWS WEBSITE</h3>
-            <a href="{{ url_for('viewNews') }}"><img src="http://blog.thebrickfactory.com/design/images/nyt.gif" alt="Image"></a>
+            <a href="{{ url_for('viewNews') }}"><img src="http://blog.thebrickfactory.com/design/images/nyt.gif"
+                                                     alt="Image"></a>
         </div>
         <div class="col-sm-4">
             <h3> ADMIN REPORT</h3>
-            <a href="{{ url_for('adminReport') }}"><img src="https://marketingland.com/wp-content/ml-loads/2014/11/analytics-ss-1920-800x450.jpg" alt="Image"></a>
+            <a href="{{ url_for('adminReport') }}"><img
+                    src="https://marketingland.com/wp-content/ml-loads/2014/11/analytics-ss-1920-800x450.jpg"
+                    alt="Image"></a>
         </div>
         <div class="col-sm-4">
             <h3> CLIENT REPORT </h3>
-            <a href="{{ url_for('customerReport') }}"><img src="https://tips4working.files.wordpress.com/2016/10/report1.jpg" alt="Image"></a>
+            <a href="{{ url_for('customerReport') }}"><img
+                    src="https://tips4working.files.wordpress.com/2016/10/report1.jpg" alt="Image"></a>
         </div>
     </div>
 </div>
 </body>
-
-<style>
-    img {
-    max-height: 250px;
-    max-width: 250px;
-    }
-
-    h1 {background-color: #4CAF50;}
-
-</style>
 </html>
