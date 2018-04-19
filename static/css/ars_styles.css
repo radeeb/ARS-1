@@ -13,9 +13,9 @@
 .navbar-header a.navbar-brand {
     background-color: #555666;
     border-color: whitesmoke;
-    color: white;
+    color: whitesmoke;
     font-weight: bold;
-    font-size: 54pt;
+    font-size: 55pt;
 }
 
 .navbar-header a.navbar-brand:hover {
@@ -25,35 +25,40 @@
 
 .nav.navbar-nav li.active a {
     background-color: whitesmoke;
+    color: black;
 }
 
+
+/* ===========================================================*/
+
+
 /* TABLE STYLES BELOW */
-table#databaseresults {
+table#report_table {
     width: 70%;
     margin-left: 15%;
     margin-right: 15%;
 }
 
-#databaseresults {
+#report_table {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#databaseresults td, #databaseresults th {
+#report_table td, #report_table th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#databaseresults tr:nth-child(even) {
+#report_table tr:nth-child(even) {
     background-color: white;
 }
 
-#databaseresults tr:hover {
+#report_table tr:hover {
     background-color: #ddd;
 }
 
-#databaseresults th {
+#report_table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -61,9 +66,13 @@ table#databaseresults {
     color: white;
 }
 
-#databaseresults {
+#report_table {
     font-size: 15pt;
 }
+
+
+/* ===========================================================*/
+
 
 /* HEADER STYLES BELOW */
 #header {
@@ -73,16 +82,23 @@ table#databaseresults {
     margin: 1em 0 .6em 0;
     font-weight: bolder;
     font-family: 'Hammersmith One', sans-serif;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
     position: relative;
     color: black;
 }
+
+
+/* ===========================================================*/
+
 
 /* SEARCH PAGE STYLES BELOW */
 img {
     max-height: 250px;
     max-width: 250px;
 }
+
+
+/* ===========================================================*/
+
 
 /* SEARCH PAGE STYLES BELOW */
 form {
