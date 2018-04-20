@@ -1,36 +1,26 @@
 # ARS (Advertisement Recommender System)
-
 ARS is a stand-alone, self-contained system which takes a website's user engagement data as input, and for every page in that website outputs a suggested price for an advertisement. ARS also incorporates an ad-keyword query feature so that a user is able to query the system with keywords related to the product which the user is attempting to advertise, and the ARS suggests pages where that keyword would be relevant.
 
 ## Getting Started
-
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
-
-- Python 3 (https://www.python.org/downloads/)
-- PIP Package Manager (https://pip.pypa.io/en/stable/installing/)
-#### To install the following packages open a terminal and run the commands in the parentheses
-- Flask Micro Web Framework (pip3 install flask)
-- Flask SQL Alchemy ORM (pip3 install flask-sqlalchemy)
-- Beautiful Soup HTML Parser (pip3 install bs4)
-- WTForms (pip3 install wtforms)
+- Python3
+- PIP Package Manager
+##### To install the following packages open a terminal and run the commands in the parentheses
+- Flask Micro Web Framework 
+- Flask SQL Alchemy ORM
+- Beautiful Soup HTML Parser
+- WTForms
 
 ### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
+- Install [Python3](https://www.python.org/downloads/)
+- Install [pip](https://pip.pypa.io/en/stable/installing/)
+- Install Flask
 ```
-Give the example
+pip3 install flask
 ```
 
-And repeat
-
-```
-until finished
-```
 
 End with an example of getting some data out of the system or using it for a little demo
 
