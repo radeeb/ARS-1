@@ -7,7 +7,6 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 - Python3
 - PIP Package Manager
-##### To install the following packages open a terminal and run the commands in the parentheses
 - Flask Micro Web Framework 
 - Flask SQL Alchemy ORM
 - Beautiful Soup HTML Parser
@@ -20,9 +19,18 @@ These instructions will get you a copy of the project up and running on your loc
 ```
 pip3 install flask
 ```
-
-
-End with an example of getting some data out of the system or using it for a little demo
+- Install Flask SQLAlchemy
+```
+pip3 install flask-sqlalchemy
+```
+- Install Beautiful Soup
+```
+pip3 install bs4
+```
+- Install WTForms
+```
+pip3 install wtforms
+```
 
 ## Running the tests
 
