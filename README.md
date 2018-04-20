@@ -13,21 +13,21 @@ These instructions will get you a copy of the project up and running on your loc
 - WTForms
 
 ### Installing
-- Install [Python3](https://www.python.org/downloads/)
-- Install [pip](https://pip.pypa.io/en/stable/installing/)
-- Install Flask
+1. [Python3](https://www.python.org/downloads/)
+2. [pip package manager](https://pip.pypa.io/en/stable/installing/)
+3. Flask
 ```
 pip3 install flask
 ```
-- Install Flask SQLAlchemy
+4. Flask SQLAlchemy
 ```
 pip3 install flask-sqlalchemy
 ```
-- Install Beautiful Soup
+5. Beautiful Soup
 ```
 pip3 install bs4
 ```
-- Install WTForms
+6. WTForms
 ```
 pip3 install wtforms
 ```
