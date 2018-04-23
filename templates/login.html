@@ -1,12 +1,15 @@
+<!--{% extends "bootstrap/base.html" %}-->
+<!--{% import "bootstrap/wtf.html" as wtf %}-->
+
+<!--{% block title %}-->
+<!--Login-->
+<!--{% endblock %}-->
+<html>
 {% block body %}
-
-
 <head>
-    <title>Advertisement Recommender System</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/ars_styles.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 
 <body>
@@ -19,27 +22,29 @@
         <ul class="nav navbar-nav">
             <li><a href="{{ url_for('index') }}">Home</a></li>
             <li><a href="{{ url_for('viewNews') }}">News</a></li>
-            <li><a href="{{ url_for('adminReport') }}">Admin Report</a></li>
+            <li class="active"><a href="{{ url_for('adminReport') }}">Admin Report</a></li>
             <li><a href="{{ url_for('customerReport') }}">Customer Report</a></li>
-            <li class="active"><a href="{{ url_for('search') }}">Search</a></li>
+            <li><a href="{{ url_for('search') }}">Search</a></li>
         </ul>
     </div>
 </nav>
 
 
-<p id="header">SEARCH BY KEYWORD</p>
+<p id="header">LOGIN</p>
+
 
 {% for message in get_flashed_messages() %}
 <div class=flash>{{ message }}</div>
 {% endfor %}
 
-{% from "_formhelpers.html" import render_field %}
-<form method=post>
-    <dl>
-        {{ render_field(form.search) }}
-    </dl>
-    <p><input type=submit value=Search>
+<form method="POST" action="/login">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.username) }}
+    {{ wtf.form_field(form.password) }}
+    <button type="submit">Login</button>
 </form>
+
+
 </body>
 {% endblock %}
-			
+</html>

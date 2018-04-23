@@ -18,7 +18,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" >ARS</a>
+            <a class="navbar-brand">ARS</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="{{ url_for('index') }}">Home</a></li>
@@ -42,10 +42,10 @@
     </thead>
     <tbody>
     {% for row in Reports %}
-        <tr>
-            <td>{{ row.URL }}</td>
-            <td>${{ row.Price }}</td>
-        </tr>
+    <tr>
+        <td>{{ row.URL }}</td>
+        <td>${{ row.Price }}</td>
+    </tr>
     {% endfor %}
     </tbody>
 

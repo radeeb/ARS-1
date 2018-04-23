@@ -2,9 +2,13 @@
 import json
 import os
 
-from flask import Flask, flash, redirect, render_template, request
+from flask import Flask, flash, redirect, render_template, request, url_for
+from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
 # from forms import keywordSearch
-from wtforms import Form, StringField
+from wtforms import Form, StringField, PasswordField
+from wtforms.validators import InputRequired
+from flask_login import LoginManager, login_user, login_required, logout_user
 
 import modules.keywordFinder.keyword_finder as kwf
 from database.api import Database
@@ -19,6 +23,8 @@ MIN_PRICE = 1
 MAX_PRICE = 200
 
 app = Flask(__name__)
+Bootstrap(app)
+
 localPort = 8080
 app.config.from_object(__name__)
 app.config.update(dict(
@@ -31,12 +37,23 @@ Base.init_app(app)  # bind the database instance to this application
 app.app_context().push()  # useful when you have more than 1 flask app
 Base.create_all()  # create all the tables
 DB = Database(Base)
+DB.insert_default()
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 
 # ------------------------------------------------------------------------------
 
 
 # --------------------------------Web Interface---------------------------------
+@login_manager.user_loader
+def load_user(user_id):
+    username = DB.get_id(user_id)
+    return username
+
+
 @app.route("/", methods=["GET"])
 def index():
     site = "index.html"
@@ -81,6 +98,7 @@ def visit():
 
 # Builds a report from the pages in the database
 @app.route("/adminReport", methods=["GET"])
+@login_required
 def adminReport():
     pages = DB.get_all_pages()
     reports = [dict(URL=page.url,
@@ -98,6 +116,31 @@ def customerReport():
     reports = [dict(URL=page.url,
                     Price=ad_price(page.url)) for page in pages]
     return render_template("customerReport.html", Reports=reports)
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+    site = "login.html"
+    if form.validate_on_submit():
+        username = form.username.data
+        user = DB.get_user(username)
+        if user:
+            if user.password == form.password.data:
+                login_user(user)
+                return redirect(url_for('adminReport'))
+
+        flash("Username/password invalid")
+        return redirect('/login')
+        # return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
+    return render_template(site, form=form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 
 @app.route("/search", methods=['GET', 'POST'])
@@ -131,6 +174,15 @@ def search_results(search):
 
 
 # --------------------------------Functions/Classes-----------------------------
+class LoginForm(FlaskForm):
+    username = StringField("username", validators=[InputRequired()])
+    password = PasswordField("password", validators=[InputRequired()])
+
+
+class keywordSearch(Form):
+    search = StringField('Enter keyword:', '')
+
+
 # Stores the keywords found on a given url in the DB
 def store_keywords(url):
     keywords = kwf.getKeys("http://localhost:8080" + url)
@@ -156,10 +208,6 @@ def ad_price(url):
         price = MIN_PRICE
     price = format(price, '.2f')
     return price
-
-
-class keywordSearch(Form):
-    search = StringField('Enter keyword:', '')
 
 
 # ------------------------------------------------------------------------------

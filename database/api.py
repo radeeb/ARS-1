@@ -1,5 +1,4 @@
 from database.schema import *
-import json
 
 
 # api to interact with database
@@ -23,13 +22,29 @@ class Database:
             ))
             self.base.session.commit()
 
+    def insert_default(self):
+        if User.query.filter_by(username="admin").first() is None:
+            admin = User(username="admin", password="password")
+            self.base.session.add(admin)
+            self.base.session.commit()
+
     def get_all_pages(self):
         return self.base.session.query(Page).all()
 
     def get_page(self, url):
         return self.base.session.query(Page).get(url)
 
-    # -------------------- PageVisit --------------------
+    # -------------------- User ---------------------------------
+
+    def get_user(self, user):
+        user_name = self.base.session.query(User).filter_by(username=user).first()
+        return user_name
+
+    def get_id(self, id_user):
+        user_name = self.base.session.query(User).get(int(id_user))
+        return user_name
+
+    # -------------------- PageVisit -----------------------------
     def insert_page_visit(self, url, activeRatio, focusRatio, visitTime):
         # Insert the web page visit
         self.base.session.add(PageVisit(

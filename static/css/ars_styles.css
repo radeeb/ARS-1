@@ -7,7 +7,6 @@
 .nav.navbar-nav li a {
     color: white;
     font-size: 17pt;
-    /*font-weight: bold;*/
 }
 
 .navbar-header a.navbar-brand {
@@ -75,7 +74,6 @@ table#report_table {
 
 /* ===========================================================*/
 
-
 /* HEADER STYLES BELOW */
 #header {
     text-align: center;
@@ -90,19 +88,12 @@ table#report_table {
 
 
 /* ===========================================================*/
-
-
-/* SEARCH PAGE STYLES BELOW */
+/* SEARCH/LOGIN PAGE STYLES BELOW */
 img {
     max-height: 250px;
     max-width: 250px;
 }
 
-
-/* ===========================================================*/
-
-
-/* SEARCH PAGE STYLES BELOW */
 form {
     text-align: center;
 }
@@ -113,7 +104,6 @@ form {
     margin-right: 40%;
     text-align: center;
     background: #13c08d;
-    padding: 0.25em;
     border: 1px solid #000000;
 }
 

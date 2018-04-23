@@ -18,7 +18,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" >ARS</a>
+            <a class="navbar-brand">ARS</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="{{ url_for('index') }}">Home</a></li>
@@ -26,6 +26,7 @@
             <li class="active"><a href="{{ url_for('adminReport') }}">Admin Report</a></li>
             <li><a href="{{ url_for('customerReport') }}">Customer Report</a></li>
             <li><a href="{{ url_for('search') }}">Search</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -45,13 +46,13 @@
     </thead>
     <tbody>
     {% for row in Reports %}
-        <tr>
-            <td>{{ row.URL }}</td>
-            <td>{{ row.ActiveRatio }}</td>
-            <td>{{ row.FocusRatio }}</td>
-            <td>{{ row.visitTime }}</td>
-            <td>{{ row.numberOfVisits }}</td>
-        </tr>
+    <tr>
+        <td>{{ row.URL }}</td>
+        <td>{{ row.ActiveRatio }}</td>
+        <td>{{ row.FocusRatio }}</td>
+        <td>{{ row.visitTime }}</td>
+        <td>{{ row.numberOfVisits }}</td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>
