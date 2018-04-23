@@ -1,19 +1,14 @@
-<!--{% extends "bootstrap/base.html" %}-->
-<!--{% import "bootstrap/wtf.html" as wtf %}-->
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-<!--{% block title %}-->
-<!--Login-->
-<!--{% endblock %}-->
-<html>
-{% block body %}
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/ars_styles.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
 
-<body>
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="../static/css/ars_styles.css">
+{% endblock %}
 
+
+{% block navbar %}
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -32,19 +27,24 @@
 
 <p id="header">LOGIN</p>
 
-
 {% for message in get_flashed_messages() %}
 <div class=flash>{{ message }}</div>
 {% endfor %}
 
-<form method="POST" action="/login">
-    {{ form.hidden_tag() }}
-    {{ wtf.form_field(form.username) }}
-    {{ wtf.form_field(form.password) }}
-    <button type="submit">Login</button>
-</form>
 
-
-</body>
 {% endblock %}
-</html>
+
+
+{% block content %}
+<div class="container">
+
+    <form class="form-signin" method="POST" action="/login">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.username) }}
+        {{ wtf.form_field(form.password) }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+</div> <!-- /container -->
+{% endblock %}
+
