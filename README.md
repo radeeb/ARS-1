@@ -9,6 +9,7 @@ This section lists all the necessary prerequisites needed for running the ARS as
 - PIP Package Manager
 - Flask Micro Web Framework 
 - Flask SQL Alchemy
+- Flask Bootstrap
 - Flask Login
 - Flask WTF
 - WTForms
@@ -25,19 +26,23 @@ $ pip3 install flask
 ```
 $ pip3 install flask-sqlalchemy
 ```
-5. Flask Login
+5. Flask Bootstrap
+```
+$ pip3 install flask-bootstrap
+```
+6. Flask Login
 ```
 $ pip3 install flask-login
 ```
-6. Flask WTF
+7. Flask WTF
 ```
 $ pip3 install flask-wtf
 ```
-7. WTForms
+8. WTForms
 ```
 $ pip3 install wtforms
 ```
-8. Beautiful Soup
+9. Beautiful Soup
 ```
 $ pip3 install bs4
 ```
