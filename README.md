@@ -49,9 +49,10 @@ $ pip3 install bs4
 
 ## Starting the ARS
 1. Navigate to the root directory of the ARS
-2. Open a terminal, run `python3 app.py`
-3. Launch a web browser
-4. In the URL bar type `localhost:8080`
+2. Open a terminal
+3. `$ python3 app.py`
+4. Launch a web browser
+5. In the URL bar type `localhost:8080`
 
 ## Licenses
 ### The MIT License
