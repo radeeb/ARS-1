@@ -176,8 +176,8 @@ def search_results(search):
 # --------------------------------Functions/Classes-----------------------------
 # This class is used for login form
 class LoginForm(FlaskForm):
-    username = StringField("username", validators=[InputRequired()])
-    password = PasswordField("password", validators=[InputRequired()])
+    username = StringField("Username", validators=[InputRequired()])
+    password = PasswordField("Password", validators=[InputRequired()])
 
 
 # This class is used for keyword search form
