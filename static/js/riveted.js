@@ -359,7 +359,7 @@ var riveted = (function () {
         window.addEventListener("beforeunload", function (event) {
 
             //to display a confirm alert uncomment the line below
-            event.returnValue = "Are you sure?";
+            // event.returnValue = "Are you sure?";
 
             var activeRatio = Math.floor((clockTime / visitTime) * 100);
             console.log("Active Ratio: ", activeRatio);
