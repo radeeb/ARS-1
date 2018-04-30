@@ -49,7 +49,7 @@ $ pip3 install bs4
 
 ## Starting the ARS
 1. Navigate to the root directory of the ARS
-2. Double-click the file app.py
+2. Open a terminal, run `python3 app.py`
 3. Launch a web browser
 4. In the URL bar type `localhost:8080`
 
