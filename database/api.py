@@ -1,7 +1,6 @@
 from database.schema import *
 
 
-# api to interact with database
 class Database:
     def __init__(self, base):
         self.base = base
