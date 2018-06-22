@@ -58,7 +58,7 @@ def getKeys(website):
 
     ignoreList = readFile(IGNORELIST)
 
-    # print(articleText)
+    #print(articleText)
     return getKeyWords(articleText.split(), ignoreList)
 
 
