@@ -28,6 +28,7 @@
 
         gtag('config', 'UA-19410358-6');
 
+
     </script>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
@@ -38,6 +39,7 @@
     <!--call Riveted function-->
     <script>
         riveted.init();
+
     </script>
 
 </head>
@@ -59,41 +61,56 @@
             </ul>
         </div>
         <h2 class="title">Sports News</h2>
-        <h3 id="header">Tiger Woods is back</h3>
-        <p id="article">>I don't mean that in the sense that it's hard to watch him, at 42 years old, try to recapture
-            the glories of his astonishing,
-            but now distant, prime. Quite the contrary. Yes, watching and writing about Tiger at his peak was a thrill.
-            But I've grown to
-            believe watching Tiger wrestle with time, seeing him relearning the rhythms of his body as he attempts to
-            summon one last run at
-            Jack Nicklaus' majors record, has a chance to be the most enjoyable era of his career. You might disagree --
-            because who in their
-            right mind wouldn't prefer to have the 2000 Tiger or 2006 Tiger back? -- but consider this: Tiger was never
-            meant to play the
-            underdog. He has always been golf's Goliath, a dominant force who didn't beat other players; he steamrolled
-            them. It was
-            awe-inspiring, but, at the height of his powers, it sometimes felt like rooting for a corporation. Yet, here
-            we are, the week of
-            the 2018 Masters, with a healthy Tiger having a realistic chance to chase an unexpected, improbable finish.
-            When I say it's hard
-            to watch him play, I mean it literally. You have to push and elbow your way through a gallery that feels
-            more like a crowded street
-            bazaar. You have to crane your neck and invade someone's personal space just to get a glimpse of him on the
-            tee as he mulls whether
-            to hit driver or 3-wood. Often, right when you finally get a sliver of daylight and an unobstructed view, a
-            person near you will
-            thrust their cellphone into your line of sight, camera rolling, because he or she is desperate to take home
-            a pixelated souvenir.
-            This phenomenon isn't limited to a particular demographic. People of all ages, races, tax brackets, and
-            parts of the country are
-            back by his side, and most of them cannot resist shouting encouragement to a man who almost never
-            acknowledges it. Spend a day
-            following Tiger around and you can't help but notice that one word pops up over and over again. Frat boys,
-            socialites, finance bros,
-            lawyers, hippies, soccer moms, biker dudes and little kids all shout out some version of it as he strolls
-            by, in a way that feels
-            like a mixture of reassurance and longing.
-        </p>
+        <section id="tennis">
+            <h3 id="header">Tiger Woods is back</h3>
+            <p id="article">>I don't mean that in the sense that it's hard to watch him, at 42 years old, try to
+                recapture
+                the glories of his astonishing,
+                but now distant, prime. Quite the contrary. Yes, watching and writing about Tiger at his peak was a
+                thrill.
+                But I've grown to
+                believe watching Tiger wrestle with time, seeing him relearning the rhythms of his body as he attempts
+                to
+                summon one last run at
+                Jack Nicklaus' majors record, has a chance to be the most enjoyable era of his career. You might
+                disagree --
+                because who in their
+                right mind wouldn't prefer to have the 2000 Tiger or 2006 Tiger back? -- but consider this: Tiger was
+                never
+                meant to play the
+                underdog. He has always been golf's Goliath, a dominant force who didn't beat other players; he
+                steamrolled
+                them. It was
+                awe-inspiring, but, at the height of his powers, it sometimes felt like rooting for a corporation. Yet,
+                here
+                we are, the week of
+                the 2018 Masters, with a healthy Tiger having a realistic chance to chase an unexpected, improbable
+                finish.
+                When I say it's hard
+                to watch him play, I mean it literally. You have to push and elbow your way through a gallery that feels
+                more like a crowded street
+                bazaar. You have to crane your neck and invade someone's personal space just to get a glimpse of him on
+                the
+                tee as he mulls whether
+                to hit driver or 3-wood. Often, right when you finally get a sliver of daylight and an unobstructed
+                view, a
+                person near you will
+                thrust their cellphone into your line of sight, camera rolling, because he or she is desperate to take
+                home
+                a pixelated souvenir.
+                This phenomenon isn't limited to a particular demographic. People of all ages, races, tax brackets, and
+                parts of the country are
+                back by his side, and most of them cannot resist shouting encouragement to a man who almost never
+                acknowledges it. Spend a day
+                following Tiger around and you can't help but notice that one word pops up over and over again. Frat
+                boys,
+                socialites, finance bros,
+                lawyers, hippies, soccer moms, biker dudes and little kids all shout out some version of it as he
+                strolls
+                by, in a way that feels
+                like a mixture of reassurance and longing.
+            </p>
+        </section>
     </div>
     <div id="validators">  <!-- You could keep inside the overallContent div -->
         <a href="{{ url_for('index') }}"><img
@@ -117,6 +134,7 @@
             mode: 'fade',
             captions: true
         });
+
     </script>
 
 </div>
@@ -129,5 +147,6 @@
         height: 100px;
         width: 100px;
     }
+
 </style>
 </html>
