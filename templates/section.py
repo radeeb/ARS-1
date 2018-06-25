@@ -1,13 +1,12 @@
 '''
-Prints top 50 ranked baseball players with
-associated text
+Finds the section id of keywords
 '''
 
 from bs4 import BeautifulSoup
 import urllib.request
 
 
-def findSection():
+def findSection(word):
     '''
     :param word: word to look for in the website
     :return: section ids of where the desired word is located
@@ -20,13 +19,13 @@ def findSection():
     pTags = soup.find_all("p") #finds all p tags
 
     for i in range(len(pTags)):
-        if pTags[i].text.find("Bangladesh") >= 0:
+        if pTags[i].text.find(word) >= 0:
             parent = pTags[i].find_parent()
-            sectionID = parent['id']
+            sectionID = parent['id'] #finds the id of the parent
             #print(sectionID)
             sectionList.append(sectionID)
 
     return sectionList
 
-findSection()
-print(findSection())
+findSection("cricketers")
+print(findSection("cricketers"))
