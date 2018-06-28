@@ -11,6 +11,7 @@ from wtforms.validators import InputRequired
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 import modules.keywordFinder.keyword_finder as kwf
+import modules.keywordFinder.sectionFinder as sf
 from database.api import Database
 from database.schema import Base
 
@@ -164,6 +165,7 @@ def search_results(search):
         page_urls = DB.get_pages_from_kw(search_string)
         pages = [DB.get_page(page) for page in page_urls]
         found = [dict(URL=page.url, Price=ad_price(page.url)) for page in pages]
+        #print(found)= [{'URL': '/sports', 'Price': '41.48'}]
         if len(found) == 0:
             flash("No results found!")
             return redirect("/search")
@@ -190,6 +192,11 @@ def store_keywords(url):
     keywords = kwf.getKeys("http://localhost:8080" + url)
     DB.insert_keywords(url, keywords)
 
+    for kw in keywords:
+        print(kw)
+        sections = sf.findSection(url, kw)
+        print(sections)
+        DB.insert_keyword_sections(kw, url, sections)
 
 # Engagement index for a specific page
 def engagement_index(url):

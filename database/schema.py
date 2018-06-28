@@ -37,3 +37,4 @@ class PageVisit(Base.Model):
 class PageKeyword(Base.Model):
     keyword = Base.Column(Base.String, primary_key=True)
     page_url = Base.Column(Base.Integer, Base.ForeignKey("page.url"), primary_key=True)
+    sections = Base.Column(Base.String)

@@ -77,7 +77,13 @@ class Database:
         for kw in keywords:
             if len(PageKeyword.query.filter_by(keyword=kw, page_url=url).all()) == 0:
                 self.base.session.add(PageKeyword(keyword=kw,
-                                                  page_url=url))
+                                                  page_url=url,sections= "TEST"))
+        self.base.session.commit()
+
+    def insert_keyword_sections(self, kw, url, sections):
+        kw = self.base.session.query(PageKeyword).filter_by(keyword=kw, page_url= url).first()
+        kw.sections = str(sections)
+
         self.base.session.commit()
 
     # Returns a list of pages that a keyword is found on
