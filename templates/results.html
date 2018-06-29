@@ -38,6 +38,7 @@
     <tr>
         <th>URL</th>
         <th>Price</th>
+        <th>Recommended Sections</th>
     </tr>
     </thead>
     <tbody>
@@ -45,6 +46,7 @@
     <tr>
         <td>{{ row.URL }}</td>
         <td>${{ row.Price }}</td>
+        <td>{{row.Sections}}</td>
     </tr>
     {% endfor %}
     </tbody>

@@ -164,7 +164,7 @@ def search_results(search):
     else:
         page_urls = DB.get_pages_from_kw(search_string)
         pages = [DB.get_page(page) for page in page_urls]
-        found = [dict(URL=page.url, Price=ad_price(page.url)) for page in pages]
+        found = [dict(URL=page.url, Price=ad_price(page.url), Sections= "To be updated") for page in pages]
         #print(found)= [{'URL': '/sports', 'Price': '41.48'}]
         if len(found) == 0:
             flash("No results found!")
@@ -192,6 +192,7 @@ def store_keywords(url):
     keywords = kwf.getKeys("http://localhost:8080" + url)
     DB.insert_keywords(url, keywords)
 
+    #to store the section id of the keyword
     for kw in keywords:
         print(kw)
         sections = sf.findSection(url, kw)
