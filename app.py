@@ -164,7 +164,7 @@ def search_results(search):
     else:
         page_urls = DB.get_pages_from_kw(search_string)
         pages = [DB.get_page(page) for page in page_urls]
-        found = [dict(URL=page.url, Price=ad_price(page.url), Sections= "To be updated") for page in pages]
+        found = [dict(URL=page.url, Price=ad_price(page.url), Sections= sf.findSection(page.url, search_string)) for page in pages]
         #print(found)= [{'URL': '/sports', 'Price': '41.48'}]
         if len(found) == 0:
             flash("No results found!")
@@ -193,11 +193,12 @@ def store_keywords(url):
     DB.insert_keywords(url, keywords)
 
     #to store the section id of the keyword
-    for kw in keywords:
+    #uncomment this if system needs a copy of sections stored in database
+    '''for kw in keywords:
         print(kw)
         sections = sf.findSection(url, kw)
         print(sections)
-        DB.insert_keyword_sections(kw, url, sections)
+        DB.insert_keyword_sections(kw, url, sections)'''
 
 # Engagement index for a specific page
 def engagement_index(url):
