@@ -33,6 +33,19 @@ class Database:
     def get_page(self, url):
         return self.base.session.query(Page).get(url)
 
+    def get_page_popularity_by_keyword(self, url):
+        '''# returns the total popularity of the page according to keyword search history'''
+        keywords = self.base.session.query(PageKeyword).filter_by(page_url=url).all()
+        hits = 0
+
+        for kw in keywords:
+            if (kw.keywordSearches is None): #to make sure no null values existe before addition
+                kw.keywordSearches = 0
+            hits = hits + kw.keywordSearches
+
+        self.base.session.commit()
+        return hits
+
     # -------------------- User ---------------------------------
 
     def get_user(self, user):
@@ -77,14 +90,22 @@ class Database:
         for kw in keywords:
             if len(PageKeyword.query.filter_by(keyword=kw, page_url=url).all()) == 0:
                 self.base.session.add(PageKeyword(keyword=kw,
-                                                  page_url=url,sections= "TEST"))
+                                                  page_url=url))
         self.base.session.commit()
 
-    def insert_keyword_sections(self, kw, url, sections):
+    def update_search_history(self, search_string): #updates the number of times a keyword is searched
+        keywords = self.base.session.query(PageKeyword).filter_by(keyword=search_string).all()
+        for kw in keywords:
+            if (kw.keywordSearches is None): #to make sure no null values exist before update
+                kw.keywordSearches =0
+            kw.keywordSearches += 1
+        self.base.session.commit()
+
+    '''def insert_keyword_sections(self, kw, url, sections):
         kw = self.base.session.query(PageKeyword).filter_by(keyword=kw, page_url= url).first()
         kw.sections = str(sections)
 
-        self.base.session.commit()
+        self.base.session.commit()'''
 
     # Returns a list of pages that a keyword is found on
     def get_pages_from_kw(self, kw):

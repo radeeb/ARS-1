@@ -94,6 +94,8 @@ def visit():
     # Store the keywords
     store_keywords(data["url"])
     print("Visit successfully recorded in database")
+
+    print("Total Hits:  ", DB.get_page_popularity_by_keyword(data["url"]))
     return response
 
 
@@ -162,6 +164,7 @@ def search_results(search):
     # Sends entered data to search function in api.py and either returns a report with returned values or flashes no
     # results found.
     else:
+        DB.update_search_history(search_string)
         page_urls = DB.get_pages_from_kw(search_string)
         pages = [DB.get_page(page) for page in page_urls]
         found = [dict(URL=page.url, Price=ad_price(page.url), Sections= sf.findSection(page.url, search_string)) for page in pages]
@@ -211,7 +214,8 @@ def engagement_index(url):
 # Price based on engagement index
 def ad_price(url):
     EI = engagement_index(url)
-    price = MAX_PRICE * EI / 100
+    search_popularity = DB.get_page_popularity_by_keyword(url)
+    price = (MAX_PRICE * EI / 100) + search_popularity
     price = round(price, 2)
     if price > MAX_PRICE:
         price = MAX_PRICE
