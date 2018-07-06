@@ -75,12 +75,12 @@ def getKeys(website):
 
 def getKeyWords(words, ignoreList):
     MINKEYS = 4  # Minimum number of keys to return
-    MAXKEYS = 10  # Maximum number of keys to return
+    MAXKEYS = 20  # Maximum number of keys to return
 
     keyWords = []
     punctuation = ['.', ',', '!', '(', ')', '?', '"', '-', '\n', '\r']
     # 1 keyword per 250 words in article
-    keyNum = int(len(words) / 250)
+    keyNum = int(len(words) / 50)
     # minimum of 5 keywords per article
     if keyNum < MINKEYS:
         keyNum = MINKEYS
