@@ -1,13 +1,14 @@
-//original riveted with some added methods: console outputs
+//original riveted with some added methods: console outputs, section wise data for golf section
 //active  and focus ratio before closing tab. Data is sent by ajax
 //to local host port 8080
 
 
 //server variables
-var serverUrl = "/visit";
+var serverUrl = "/visitSection";
 var siteURL = window.location.pathname
+var section = "golf2";
 
-var riveted = (function () {
+var rivetedGolf = (function () {
 
     var started = false;
     var stopped = false;
@@ -338,19 +339,19 @@ var riveted = (function () {
         var visibleTime = visitTime - hiddenTime;
         var fR = Math.floor((visibleTime / visitTime) * 100);
 
-        var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR, "visitTime": visibleTime};
+        var outputData = {"url": siteURL, "section": section, "activeRatio": aR};
 
         outputData = JSON.stringify(outputData);
         console.log(outputData);
 
-        console.log("sending data to server");
+        console.log("sending section wise data to server");
         $.ajax({
             url: serverUrl,
             type: "POST",
             contentType: "application/json",
             data: outputData,
             success: function (data) {
-                console.log("SUCCESS:Sent data to server");
+                console.log("SUCCESS:Sent section wise data to server");
             },
             error: function (xhr, status, err) {
                 console.log(err);

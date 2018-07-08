@@ -46,6 +46,18 @@ class Database:
         self.base.session.commit()
         return hits
 
+    # -------------------- Section ------------------------------
+
+    def insert_section(self, url, sectionName):
+        if Section.query.get(sectionName) is None:
+            # owner of the website uses this
+            self.base.session.add(Section(
+                url=url,
+                name = sectionName,
+                avgActiveRatio=0,
+            ))
+            self.base.session.commit()
+
     # -------------------- User ---------------------------------
 
     def get_user(self, user):

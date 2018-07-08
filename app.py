@@ -95,7 +95,21 @@ def visit():
     store_keywords(data["url"])
     print("Visit successfully recorded in database")
 
-    print("Total Hits:  ", DB.get_page_popularity_by_keyword(data["url"]))
+    #print("Total Hits:  ", DB.get_page_popularity_by_keyword(data["url"]))
+    return response
+
+@app.route("/visitSection", methods=["POST"])
+def visitSection():
+    response = "You visited a section of ARS website!"
+    # Decode JSON into dictionary
+    data = json.loads(request.data)
+    # Store the page
+    DB.insert_section(data["url"], data["section"])
+    # Store the page visit
+    #DB.insert_page_visit(data["url"], data["activeRatio"], data["focusRatio"], data["visitTime"])
+    # Store the keywords
+    print("Section Visit successfully recorded in database")
+
     return response
 
 
@@ -197,7 +211,7 @@ def store_keywords(url):
 
     #to store the section id of the keyword
     #uncomment this if system needs a copy of sections stored in database
-    '''for kw in keywords:
+    '''for kw in keywords
         print(kw)
         sections = sf.findSection(url, kw)
         print(sections)

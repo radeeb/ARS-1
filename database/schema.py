@@ -39,3 +39,15 @@ class PageKeyword(Base.Model):
     page_url = Base.Column(Base.Integer, Base.ForeignKey("page.url"), primary_key=True)
     keywordSearches = Base.Column(Base.Integer)
 
+class Section(Base.Model):
+    name = Base.Column(Base.String(100), primary_key=True)
+    url = Base.Column(Base.String(100), Base.ForeignKey('page.url'))
+    avgActiveRatio = Base.Column(Base.Float(precision='3,2'))  # averaged active ratio avg of all website visits
+    visits = Base.relationship('SectionVisit', backref="section",
+                               lazy="dynamic")  # one to many relationship with section visits
+
+class SectionVisit(Base.Model):
+    visitID = Base.Column(Base.Integer, primary_key=True, autoincrement=True)
+    name = Base.Column(Base.Integer, Base.ForeignKey('section.name'))
+    url = Base.Column(Base.String(100))
+    activeRatio = Base.Column(Base.Float)
