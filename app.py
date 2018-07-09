@@ -104,10 +104,11 @@ def visitSection():
     # Decode JSON into dictionary
     data = json.loads(request.data)
     # Store the page
-    DB.insert_section(data["url"], data["section"])
-    # Store the page visit
-    #DB.insert_page_visit(data["url"], data["activeRatio"], data["focusRatio"], data["visitTime"])
-    # Store the keywords
+    try:
+        DB.insert_section(data["url"], data["section"])
+        DB.insert_section_visit(data["url"], data["section"], data["activeRatio"])
+    except KeyError: #to avoid error when trying to insert data before it is sent
+        pass
     print("Section Visit successfully recorded in database")
 
     return response

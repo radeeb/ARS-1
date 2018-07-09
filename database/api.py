@@ -58,6 +58,26 @@ class Database:
             ))
             self.base.session.commit()
 
+    def insert_section_visit(self, url, sectionName, activeRatio):
+        # Insert the web page visit
+        self.base.session.add(SectionVisit(
+            name=sectionName,
+            activeRatio=activeRatio,
+            url=url))
+
+        # Update average focus/active ratio every time a new visit
+        visits = SectionVisit.query.filter_by(name=sectionName).all()
+        activeRatios = 0
+
+        for visit in visits:
+            if visit.activeRatio is not None:
+                activeRatios += visit.activeRatio
+
+        section = Section.query.get(sectionName)
+        section.avgActiveRatio = activeRatios / len(visits)
+
+        self.base.session.commit()
+
     # -------------------- User ---------------------------------
 
     def get_user(self, user):

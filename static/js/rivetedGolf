@@ -6,7 +6,7 @@
 //server variables
 var serverUrl = "/visitSection";
 var siteURL = window.location.pathname
-var section = "golf2";
+var section = "golf";
 
 var rivetedGolf = (function () {
 
