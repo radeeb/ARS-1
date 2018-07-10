@@ -37,16 +37,19 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.bxslider.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/riveted.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/rivetedGolf') }}"></script>
 
-    <!--call Riveted functions-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/rivetedCombined') }}"></script>
     <script>
         riveted.init();
-        rivetedGolf.init('ad_section');
-
-
+        rivetedGolf.init();
     </script>
+
+
+
+    <!--<script type="text/javascript" src="{{ url_for('static', filename='js/rivetedCombined') }}"></script>-->
+
+    <!--call Riveted functions-->
+
 
     <style>
         img {
@@ -226,8 +229,6 @@
         height: 100px;
         width: 100px;
     }
-
-
 
 
 </style>

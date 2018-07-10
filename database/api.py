@@ -55,26 +55,37 @@ class Database:
                 url=url,
                 name = sectionName,
                 avgActiveRatio=0,
+                focusRatio=0,
+                avgClockTime=0
             ))
             self.base.session.commit()
 
-    def insert_section_visit(self, url, sectionName, activeRatio):
+    def insert_section_visit(self, url, sectionName, activeRatio, clockTime):
         # Insert the web page visit
         self.base.session.add(SectionVisit(
             name=sectionName,
             activeRatio=activeRatio,
-            url=url))
+            url=url,
+            clockTime= clockTime
+        ))
 
-        # Update average focus/active ratio every time a new visit
+        # Update average active ratio every time a new visit
         visits = SectionVisit.query.filter_by(name=sectionName).all()
         activeRatios = 0
+        clockTimes = 0
 
         for visit in visits:
             if visit.activeRatio is not None:
                 activeRatios += visit.activeRatio
+                clockTimes += visit.clockTime
 
         section = Section.query.get(sectionName)
         section.avgActiveRatio = activeRatios / len(visits)
+        section.avgClockTime = clockTimes / len(visits)
+
+        #update the focus ration every time a new visit is made
+
+
 
         self.base.session.commit()
 

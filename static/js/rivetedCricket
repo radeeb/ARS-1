@@ -6,9 +6,9 @@
 //server variables
 var serverUrl = "/visitSection";
 var siteURL = window.location.pathname
-var section = "golf";
+var section = "cricket";
 
-var rivetedGolf = (function () {
+var rivetedCricket = (function () {
 
     var started = false;
     var stopped = false;
@@ -88,7 +88,7 @@ var rivetedGolf = (function () {
         // Basic activity event listeners
 
         //console.log(userRivetedClass);
-        var section = document.getElementById('golf');
+        var section = document.getElementById('cricket');
         //console.log("section is: " , section);
         section.addEventListener("keydown", trigger);
         section.addEventListener("click", trigger);

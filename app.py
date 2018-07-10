@@ -103,13 +103,20 @@ def visitSection():
     response = "You visited a section of ARS website!"
     # Decode JSON into dictionary
     data = json.loads(request.data)
-    # Store the page
+
+    # Store the section
     try:
         DB.insert_section(data["url"], data["section"])
-        DB.insert_section_visit(data["url"], data["section"], data["activeRatio"])
-    except KeyError: #to avoid error when trying to insert data before it is sent
+    except KeyError:  # to avoid error when trying to insert data before it is sent
         pass
-    print("Section Visit successfully recorded in database")
+
+    try:
+        #print(data["clockTime"])
+        DB.insert_section_visit(data["url"], data["section"], data["activeRatio"], data["clockTime"])
+        print("Section Visit successfully recorded in database")
+    except KeyError:
+        pass
+        #print("KeyError !")
 
     return response
 
