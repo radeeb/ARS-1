@@ -29,8 +29,6 @@ def findSection(url, word):
             except KeyError: #to handle a case where the keyword does not have a parent section id
                 pass
 
-
-
     return sectionList
 
 #findSection('cricketers')

@@ -80,7 +80,7 @@ def getKeyWords(words, ignoreList):
     keyWords = []
     punctuation = ['.', ',', '!', '(', ')', '?', '"', '-', '\n', '\r']
     # 1 keyword per 250 words in article
-    keyNum = int(len(words) / 50)
+    keyNum = int(len(words) / 250)
     # minimum of 5 keywords per article
     if keyNum < MINKEYS:
         keyNum = MINKEYS
