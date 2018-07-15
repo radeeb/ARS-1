@@ -102,7 +102,6 @@ var riveted = (function () {
 
         // Set global
         no_clicks = "false";
-        console.log("sth clicked");
 
     }
 

@@ -345,10 +345,11 @@ var riveted = (function () {
         var visiableTime = visitTime - hiddenTime;
         var fR = Math.floor((visiableTime / visitTime) * 100);
 
+        var abandoned = "false";
+
         if (clockTime <= 5 && no_clicks == "true")
         {
            abandoned = "true";
-           console.log("changed abandoned to true");
         }
 
         var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR, "visitTime": visiableTime, "abandonment": abandoned};

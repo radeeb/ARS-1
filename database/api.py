@@ -51,10 +51,12 @@ class Database:
                 kw.keywordSearches = 0
             total_hits = total_hits + kw.keywordSearches
 
-
         self.base.session.commit()
 
-        return hits/total_hits
+        if (total_hits ==0):
+            return 0
+        else:
+            return hits/total_hits
 
     # -------------------- Section ------------------------------
 
@@ -146,7 +148,7 @@ class Database:
         total_sessions = 0
         for visit in total_visits:
             total_sessions += 1
-            if ((visit.activeRatio is None) or (visit.visitTime <= 3)) :
+            if (visit.abandonment == "true") :
                 abandoned_sessions += 1
 
         abandonment_rate = abandoned_sessions/ total_sessions

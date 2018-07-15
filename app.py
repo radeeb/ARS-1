@@ -239,6 +239,7 @@ def ad_price(url):
     EI = engagement_index(url)
     search_popularity = DB.get_page_popularity_by_keyword(url) * MIN_PRICE
     abandonment_rate = DB.get_page_abandonment_rate(url) * MIN_PRICE
+    #print(abandonment_rate)
     price = (MAX_PRICE * EI / 100) + (search_popularity) - abandonment_rate
     price = round(price, 2)
     if price > MAX_PRICE:
