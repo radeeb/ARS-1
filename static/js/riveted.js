@@ -340,9 +340,12 @@ var riveted = (function () {
         var fR = Math.floor((visiableTime / visitTime) * 100);
 
         var abandoned = "false";
+        console.log(clockTime);
+        console.log(no_clicks);
         if (clockTime <= 5 && no_clicks == "true")
         {
            abandoned = "true";
+           console.log("changed abandoned to true");
         }
 
         var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR, "visitTime": visiableTime, "abandonment": abandoned};
@@ -374,7 +377,7 @@ var riveted = (function () {
         window.addEventListener("beforeunload", function (event) {
 
             //to display a confirm alert uncomment the line below
-            // event.returnValue = "Are you sure?";
+            event.returnValue = "Are you sure?";
 
             var activeRatio = Math.floor((clockTime / visitTime) * 100);
             console.log("Active Ratio: ", activeRatio);
