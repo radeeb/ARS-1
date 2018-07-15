@@ -32,6 +32,7 @@ class PageVisit(Base.Model):
     activeRatio = Base.Column(Base.Float)
     focusRatio = Base.Column(Base.Float)
     visitTime = Base.Column(Base.Float)
+    abandonment = Base.Column(Base.String(6))
 
 
 class PageKeyword(Base.Model):

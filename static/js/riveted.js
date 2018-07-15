@@ -6,7 +6,7 @@
 //server variables
 var serverUrl = "/visit";
 var siteURL = window.location.pathname
-
+var no_clicks = "true";
 
 var riveted = (function () {
 
@@ -89,6 +89,8 @@ var riveted = (function () {
         addListener(document, 'mousemove', throttle(trigger, 500));
         addListener(document, 'scroll', throttle(trigger, 500));
 
+        addListener(document, 'click', no_clicks_trigger);
+
         //element.on('keydown click mousemove scroll', trigger);
 
         // Page visibility listeners
@@ -96,6 +98,13 @@ var riveted = (function () {
         addListener(document, 'webkitvisibilitychange', visibilityChange);
     }
 
+    function no_clicks_trigger() {
+
+        // Set global
+        no_clicks = "false";
+        console.log("sth clicked");
+
+    }
 
     /*
      * Throttle function borrowed from:
@@ -330,7 +339,13 @@ var riveted = (function () {
         var visiableTime = visitTime - hiddenTime;
         var fR = Math.floor((visiableTime / visitTime) * 100);
 
-        var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR, "visitTime": visiableTime};
+        var abandoned = "false";
+        if (clockTime <= 5 && no_clicks == "true")
+        {
+           abandoned = "true";
+        }
+
+        var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR, "visitTime": visiableTime, "abandonment": abandoned};
 
         outputData = JSON.stringify(outputData);
         console.log(outputData);

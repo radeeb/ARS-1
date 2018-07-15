@@ -11,8 +11,7 @@ var serverUrlSection = "/visitSection";
 var siteURL = window.location.pathname
 
 var section1 = "golf";
-var section2 = "cricket";
-var section3 = "soccer";
+var abandoned_session = "true";
 
 
 var riveted = (function () {
@@ -95,11 +94,20 @@ var riveted = (function () {
         addListener(document, 'mousemove', throttle(trigger, 500));
         addListener(document, 'scroll', throttle(trigger, 500));
 
+        addListener(document, 'click', abandonment);
+
         //element.on('keydown click mousemove scroll', trigger);
 
         // Page visibility listeners
         addListener(document, 'visibilitychange', visibilityChange);
         addListener(document, 'webkitvisibilitychange', visibilityChange);
+    }
+
+    function abandonment() {
+
+        // Set global
+        abandoned_session = "false";
+
     }
 
 
@@ -336,7 +344,7 @@ var riveted = (function () {
         var visiableTime = visitTime - hiddenTime;
         var fR = Math.floor((visiableTime / visitTime) * 100);
 
-        var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR, "visitTime": visiableTime};
+        var outputData = {"url": siteURL, "activeRatio": aR, "focusRatio": fR, "visitTime": visiableTime, "abandonment": abandoned_session};
 
         outputData = JSON.stringify(outputData);
         console.log(outputData);

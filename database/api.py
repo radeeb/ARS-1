@@ -36,15 +36,25 @@ class Database:
     def get_page_popularity_by_keyword(self, url):
         '''# returns the total popularity of the page according to keyword search history'''
         keywords = self.base.session.query(PageKeyword).filter_by(page_url=url).all()
-        hits = 0
+        total_keywords = self.base.session.query(PageKeyword).all()
 
-        for kw in keywords:
-            if (kw.keywordSearches is None): #to make sure no null values existe before addition
+        hits = 0
+        total_hits = 0
+
+        for kw in keywords: #total hits for the page
+            if (kw.keywordSearches is None): #to make sure no null values exists before addition
                 kw.keywordSearches = 0
             hits = hits + kw.keywordSearches
 
+        for kw in total_keywords:#total hits for keywords from all pages
+            if (kw.keywordSearches is None): #to make sure no null values exists before addition
+                kw.keywordSearches = 0
+            total_hits = total_hits + kw.keywordSearches
+
+
         self.base.session.commit()
-        return hits
+
+        return hits/total_hits
 
     # -------------------- Section ------------------------------
 
@@ -100,13 +110,14 @@ class Database:
         return user_name
 
     # -------------------- PageVisit -----------------------------
-    def insert_page_visit(self, url, activeRatio, focusRatio, visitTime):
+    def insert_page_visit(self, url, activeRatio, focusRatio, visitTime, abandonment):
         # Insert the web page visit
         self.base.session.add(PageVisit(
             focusRatio=focusRatio,
             activeRatio=activeRatio,
             visitTime=visitTime,
-            url=url))
+            url=url,
+            abandonment= abandonment))
 
         # Update average focus/active ratio every time a new visit
         visits = PageVisit.query.filter_by(url=url).all()
@@ -127,6 +138,22 @@ class Database:
 
     def get_page_visits(self, url):
         return self.base.session.query(PageVisit).filter_by(url=url).all()
+
+    def get_page_abandonment_rate(self, url):
+        total_visits = self.base.session.query(PageVisit).filter_by(url=url).all()
+
+        abandoned_sessions = 0
+        total_sessions = 0
+        for visit in total_visits:
+            total_sessions += 1
+            if ((visit.activeRatio is None) or (visit.visitTime <= 3)) :
+                abandoned_sessions += 1
+
+        abandonment_rate = abandoned_sessions/ total_sessions
+
+        return  abandonment_rate
+
+
 
     # -------------------- PageKeyword ---------------------
     def insert_keywords(self, url, keywords):

@@ -87,10 +87,11 @@ def visit():
     response = "You visited an ARS website!"
     # Decode JSON into dictionary
     data = json.loads(request.data)
-    # Store the page 
+    print(data)
+    # Store the page
     DB.insert_page(data["url"])
     # Store the page visit
-    DB.insert_page_visit(data["url"], data["activeRatio"], data["focusRatio"], data["visitTime"])
+    DB.insert_page_visit(data["url"], data["activeRatio"], data["focusRatio"], data["visitTime"], data["abandonment"])
     # Store the keywords
     store_keywords(data["url"])
     print("Visit successfully recorded in database")
@@ -236,8 +237,9 @@ def engagement_index(url):
 # Price based on engagement index
 def ad_price(url):
     EI = engagement_index(url)
-    search_popularity = DB.get_page_popularity_by_keyword(url)
-    price = (MAX_PRICE * EI / 100) + search_popularity
+    search_popularity = DB.get_page_popularity_by_keyword(url) * MIN_PRICE
+    abandonment_rate = DB.get_page_abandonment_rate(url) * MIN_PRICE
+    price = (MAX_PRICE * EI / 100) + (search_popularity) - abandonment_rate
     price = round(price, 2)
     if price > MAX_PRICE:
         price = MAX_PRICE
