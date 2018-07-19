@@ -132,7 +132,14 @@ def adminReport():
                     FocusRatio=format(page.avgFocusRatio, ".2f"),
                     visitTime=format(page.avgVisitTime, ".2f"),
                     numberOfVisits=len(DB.get_page_visits(page.url))) for page in pages]
-    return render_template("adminReport.html", Reports=reports)
+
+    sections = DB.get_all_sections()
+    section_report = [dict(SectionName = section.name,
+                    URL=section.url,
+                    ActiveRatio=format(section.avgActiveRatio, ".2f"),
+                    ClockTime=format(section.avgClockTime, ".2f")) for section in sections]
+
+    return render_template("adminReport.html", Reports=reports, SectionReport=section_report)
 
 
 # Builds a report from the pages in the database

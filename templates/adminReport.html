@@ -30,7 +30,7 @@
         </ul>
     </div>
 </nav>
-<p id="header">ADMINISTRATOR REPORT</p>
+<p id="header">ADMINISTRATOR REPORT: ALL WEB PAGES</p>
 
 
 <!--Loops through database and inserts given values into assigned rows of the table-->
@@ -56,5 +56,31 @@
     {% endfor %}
     </tbody>
 </table>
+
+<p id="header"> SECTION WISE DATA</p>
+
+<table id="report_table">
+    <thead>
+    <tr>
+        <th>Section ID</th>
+        <th>URL</th>
+        <th>Avg Active Ratio</th>
+        <th>Average Clock Time)</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in SectionReport %}
+    <tr>
+        <td>{{ row.SectionName }}</td>
+        <td>{{ row.URL }}</td>
+        <td>{{ row.ActiveRatio }}</td>
+        <td>{{ row.ClockTime }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
 </body>
 </html>

@@ -30,6 +30,7 @@ class Database:
     def get_all_pages(self):
         return self.base.session.query(Page).all()
 
+
     def get_page(self, url):
         return self.base.session.query(Page).get(url)
 
@@ -100,6 +101,9 @@ class Database:
 
 
         self.base.session.commit()
+
+    def get_all_sections(self):
+        return self.base.session.query(Section).all()
 
     # -------------------- User ---------------------------------
 
