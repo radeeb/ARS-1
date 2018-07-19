@@ -12,6 +12,7 @@ class Page(Base.Model):
     avgActiveRatio = Base.Column(Base.Float(precision='3,2'))  # averaged active ratio avg of all website visits
     avgFocusRatio = Base.Column(Base.Float(precision='3,2'))  # averaged focus ratio avg of all website visits
     avgVisitTime = Base.Column(Base.Float(precision='3,2'))  # averaged visit time avg of all website visits
+    abandonmentRate = Base.Column(Base.Float(precision='3,2'))
     visits = Base.relationship('PageVisit', backref="page",
                                lazy="dynamic")  # one to many relationship with website visits
 

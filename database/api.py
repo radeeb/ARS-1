@@ -55,7 +55,7 @@ class Database:
         self.base.session.commit()
 
         if (total_hits ==0):
-            return 0
+            return 0,0
         else:
             return hits/total_hits, hits
 
@@ -140,6 +140,7 @@ class Database:
         page.avgFocusRatio = focusRatios / len(visits)
         page.avgVisitTime = visitTimes / len(visits)
 
+        page.abandonmentRate = self.get_page_abandonment_rate(url)
         self.base.session.commit()
 
     def get_page_visits(self, url):
@@ -176,6 +177,10 @@ class Database:
                 kw.keywordSearches =0
             kw.keywordSearches += 1
         self.base.session.commit()
+
+    def get_all_keyword_searches(self):
+        keywords = self.base.session.query(PageKeyword).order_by(desc(PageKeyword.KeywordSearches)).limit(3)
+        #print(keywords)
 
 
 
