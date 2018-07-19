@@ -56,7 +56,7 @@ class Database:
         if (total_hits ==0):
             return 0
         else:
-            return hits/total_hits
+            return hits/total_hits, hits
 
     # -------------------- Section ------------------------------
 
@@ -173,11 +173,7 @@ class Database:
             kw.keywordSearches += 1
         self.base.session.commit()
 
-    '''def insert_keyword_sections(self, kw, url, sections):
-        kw = self.base.session.query(PageKeyword).filter_by(keyword=kw, page_url= url).first()
-        kw.sections = str(sections)
 
-        self.base.session.commit()'''
 
     # Returns a list of pages that a keyword is found on
     def get_pages_from_kw(self, kw):
