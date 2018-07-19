@@ -30,6 +30,3 @@ def findSection(url, word):
                 pass
 
     return sectionList
-
-#findSection('cricketers')
-#print(findSection('cricketers'))
