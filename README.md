@@ -47,6 +47,11 @@ $ pip3 install wtforms
 $ pip3 install bs4
 ```
 
+10. lxml
+```
+$ pip3 install lxml
+```
+
 ## Starting the ARS
 1. Navigate to the root directory of the ARS
 2. Open a terminal
