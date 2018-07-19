@@ -32,23 +32,38 @@
 
 
 
-
-
-
-
     </script>
 
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.bxslider.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/riveted.js') }}"></script>
 
-    <!--call Riveted function-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/rivetedCombined') }}"></script>
     <script>
         riveted.init();
 
 
+
+
     </script>
+
+
+    <!--<script type="text/javascript" src="{{ url_for('static', filename='js/rivetedCombined') }}"></script>-->
+
+    <!--call Riveted functions-->
+
+
+    <style>
+        img {
+        float: right;
+    }
+
+
+
+
+
+    </style>
+
 </head>
 
 
@@ -67,277 +82,128 @@
                 <li><a href="{{ url_for('viewWorldNews') }}">World News</a></li>
             </ul>
         </div>
-        <div class="content_area">
-            <div class="main_content floatleft">
-                <div class="left_coloum floatleft">
-                    <div class="single_left_coloum_wrapper">
-                        <h2 class="title">from around the world</h2>
-                        <a class="more" href="#">more</a>
-                        <div class="single_left_coloum floatleft"><img
-                                src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/>
-                            <h3>DNA tests ordered to reunite separated migrant families</h3>
-                            <p>US Health Secretary Alex Azar said the tests were needed to meet a court deadline to
-                                reunite families, as the agency's usual methods were too slow.</p>
-                            <a class="readmore" href="#">read more</a></div>
-                        <div class="single_left_coloum floatleft"><img
-                                src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/>
-                            <h3>Donald Trump has no answers for the border crisis</h3>
-                            <p>Although the family separation crisis at the nation's southern border has slipped off the
-                                front pages, the crisis remains: There are still ...</p>
-                            <a class="readmore" href="#">read more</a></div>
-                        <div class="single_left_coloum floatleft"><img
-                                src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/>
-                            <h3>China may be disrupting US companies because of Trump's tariff threats</h3>
-                            <p>The trade battle between the US and China is set to formally kick off Friday, when the US
-                                is set to impose tariffs on Chinese goods...</p>
-                            <a class="readmore" href="#">read more</a></div>
-                    </div>
+        <h1 class="title">News</h1>
+        <h2> POLITICS</h2>
+        <section id="politics">
+            <h3 id="header">Trump now says he holds Putin responsible for election interference</h3>
+            <p><img src="http://i0.kym-cdn.com/photos/images/original/000/326/426/506.jpg" height="200" width="200"></p>
+            <p id="article">President Donald Trump said on Wednesday he holds his Russian counterpart Vladimir Putin
+                personally responsible for Moscow's attempts to interfere in the 2016 US election.
 
-                    <div class="single_left_coloum_wrapper">
-                        <section id="Latest Articles">
-                        <h2 class="title">latest articles</h2>
-                        <a class="more" href="#">more</a>
-                        <div class="single_left_coloum floatleft"><img
-                                src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/>
-                            <h3>Scott Pruitt has resigned as EPA administrator, Trump tweets</h3>
-                            <p>Add Trump Administration as an interest to stay up to date on the latest Trump
-                                Administration news, video, and analysis from ABC News.</p>
-                            <a class="readmore" href="#">read more</a></div>
-                        <div class="single_left_coloum floatleft"><img
-                                src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/>
-                            <h3>London Mayor Says 'Trump Baby' Blimp Can Fly In Protest Of </h3>
-                            <p>The "Trump Baby" blimp is nearly 20 feet tall, wearing nothing but a diaper and a
-                                grimace. A tuft of yellow hair tops his orange head...</p>
-                            <a class="readmore" href="#">read more</a></div>
-                        <div class="single_left_coloum floatleft"><img
-                                src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/>
-                            <h3>Lorem ipsum dolor sit amet, consectetur</h3>
-                            <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper
-                                dolor eu mattis.</p>
-                            <a class="readmore" href="#">read more</a></div>
-                        </section>
-                    </div>
-                    <div class="single_left_coloum_wrapper gallery">
-                        <h2 class="title">gallery</h2>
-                        <a class="more" href="#">more</a> <img
-                            src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/> <img
-                            src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/> <img
-                            src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/> <img
-                            src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/> <img
-                            src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/> <img
-                            src="{{ url_for('static', filename='images/single_featured.png') }}" alt=""/></div>
-                    <div class="single_left_coloum_wrapper single_cat_left">
-                        <h2 class="title">tech news</h2>
-                        <a class="more" href="#">more</a>
-                        <div class="single_cat_left_content floatleft">
-                            <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit </h3>
-                            <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor
-                                ...interdum</p>
-                            <p class="single_cat_left_content_meta">by <span>John Doe</span> | 29 comments</p>
-                        </div>
-                        <div class="single_cat_left_content floatleft">
-                            <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit </h3>
-                            <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor
-                                ...interdum</p>
-                            <p class="single_cat_left_content_meta">by <span>John Doe</span> | 29 comments</p>
-                        </div>
-                        <div class="single_cat_left_content floatleft">
-                            <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit </h3>
-                            <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor
-                                ...interdum</p>
-                            <p class="single_cat_left_content_meta">by <span>John Doe</span> | 29 comments</p>
-                        </div>
-                        <div class="single_cat_left_content floatleft">
-                            <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit </h3>
-                            <p>Nulla quis lorem neque, mattis venenatis lectus. In interdum ullamcorper dolor
-                                ...interdum</p>
-                            <p class="single_cat_left_content_meta">by <span>John Doe</span> | 29 comments</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="right_coloum floatright">
-                    <div class="single_right_coloum">
-                        <h2 class="title">from the desk</h2>
-                        <ul>
-                            <li>
-                                <div class="single_cat_right_content">
-                                    <h3>Trump's Supreme Court Pageant Could Come Down to Looks</h3>
-                                    <p>President Trump has made no secret of how important appearance is to his hiring
-                                        process. Trump has often remarked that his nominees just ...</p>
-                                    <p class="single_cat_right_content_meta"><a href="#"><span>read more</span></a> 3
-                                        hours ago</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="single_cat_right_content">
-                                    <h3>Trump to OPEC: 'Reduce pricing now!'</h3>
-                                    <p>U.S. President Donald Trump again accused the Organization of the Petroleum
-                                        Exporting Countries of driving ...</p>
-                                    <p class="single_cat_right_content_meta"><a href="#"><span>read more</span></a> 3
-                                        hours ago</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="single_cat_right_content">
-                                    <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit</h3>
-                                    <p>Nulla quis lorem neque, mattis venen atis lectus. In interdum ull amcorper dolor
-                                        eu mattis.</p>
-                                    <p class="single_cat_right_content_meta"><a href="#"><span>read more</span></a> 3
-                                        hours ago</p>
-                                </div>
-                            </li>
-                        </ul>
-                        <a class="popular_more" href="#">more</a></div>
-                    <div class="single_right_coloum">
-                        <h2 class="title">editorial</h2>
-                        <div class="single_cat_right_content editorial"><img
-                                src="{{ url_for('static', filename='images/editorial_img.png') }}" alt=""/>
-                            <h3>Lorem ipsum dolor sit amet con se cte tur adipiscing elit</h3>
-                        </div>
-                        <div class="single_cat_right_content editorial"><img
-                                src="{{ url_for('static', filename='images/editorial_img.png') }}" alt=""/>
-                            <h3>Lorem ipsum dolor sit amet con se cte tur adipiscing elit</h3>
-                        </div>
-                        <div class="single_cat_right_content editorial"><img
-                                src="{{ url_for('static', filename='images/editorial_img.png') }}" alt=""/>
-                            <h3>Lorem ipsum dolor sit amet con se cte tur adipiscing elit</h3>
-                        </div>
-                        <div class="single_cat_right_content editorial"><img
-                                src="{{ url_for('static', filename='images/editorial_img.png') }}" alt=""/>
-                            <h3>Lorem ipsum dolor sit amet con se cte tur adipiscing elit</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sidebar floatright">
-                <div class="single_sidebar"><img src="{{ url_for('static', filename='images/add1.png') }}" alt=""/>
-                </div>
-                <div class="single_sidebar">
-                    <div class="news-letter">
-                        <h2>Sign Up for Newsletter</h2>
-                        <p>Sign up to receive our free newsletters!</p>
-                        <form action="#" method="post">
-                            <input type="text" value="Name" id="name"/>
-                            <input type="text" value="Email Address" id="email"/>
-                        </form>
-                        <p class="news-letter-privacy">We do not spam. We value your privacy!</p>
-                    </div>
-                </div>
-                <div class="single_sidebar">
-                    <div class="popular">
-                        <h2 class="title">Popular</h2>
-                        <ul>
-                            <li>
-                                <div class="single_popular">
-                                    <p>Sept 24th 2045</p>
-                                    <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#"
-                                                                                                   class="readmore">Read
-                                        More</a></h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="single_popular">
-                                    <p>Sept 24th 2045</p>
-                                    <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#"
-                                                                                                   class="readmore">Read
-                                        More</a></h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="single_popular">
-                                    <p>Sept 24th 2045</p>
-                                    <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#"
-                                                                                                   class="readmore">Read
-                                        More</a></h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="single_popular">
-                                    <p>Sept 24th 2045</p>
-                                    <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#"
-                                                                                                   class="readmore">Read
-                                        More</a></h3>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="single_popular">
-                                    <p>Sept 24th 2045</p>
-                                    <h3>Lorem ipsum dolor sit amet conse ctetur adipiscing elit <a href="#"
-                                                                                                   class="readmore">Read
-                                        More</a></h3>
-                                </div>
-                            </li>
-                        </ul>
-                        <a class="popular_more">more</a></div>
-                </div>
-                <div class="single_sidebar"><img src="{{ url_for('static', filename='images/add1.png') }}" alt=""/>
-                </div>
-                <div class="single_sidebar">
-                    <h2 class="title">ADD</h2>
-                    <img src="{{ url_for('static', filename='images/add2.png') }}" alt=""/></div>
-            </div>
-        </div>
-        <div class="footer_top_area">
-            <div class="inner_footer_top"><img src="{{ url_for('static', filename='images/add3.png') }}" alt=""/></div>
-        </div>
-        <div class="footer_bottom_area">
-            <div class="copyright_text">
-                <p>This is a Test Website</p>
-                <p>Trade marks and images used in the design are the copyright of their respective owners and are used
-                    for demo purposes only.</p>
-            </div>
-        </div>
+                Speaking to CBS, Trump said he would consider Putin culpable because he's Russia's leader.
+                Sanders disputes that Trump said Russia no longer targeting US
+                Sanders disputes that Trump said Russia no longer targeting US
+                "I would because he's in charge of the country just like I consider myself to be responsible for things
+                that happen in this country," Trump said. "So certainly as the leader of the country you would have to
+                hold him responsible."
+                Trump's views surrounding election meddling have been repeatedly called into question. As recently as
+                this week -- immediately after his one-on-one meeting with Putin -- Trump appeared to believe Putin's
+                denial over the US intelligence community's conclusion that Russia interfered in the 2016 election.
+                Trump ultimately walked back the answer he gave at the joint news conference in Helsinki, and attributed
+                his comments to a simple mistake.
+
+                "In a key sentence in my remarks I said the word 'would' instead of 'wouldn't,'" Trump said on Tuesday.
+                He explained he had reviewed a transcript and video of his remarks.
+            </p>
+
+        </section>
+        <h2> MONEY</h2>
+        <section id="money">
+            <h3 id="header">This could be the Rolls-Royce of flying taxis</h3>
+            <p><img src="http://i0.kym-cdn.com/photos/images/original/000/326/426/506.jpg" height="200" width="200"></p>
+            <p id="article">
+                The UK aerospace company, which makes the jet engines that power many of the world's commercial
+                aircraft, has unveiled a concept hybrid electric vehicle that would carry four or five passengers at
+                speeds up to 250 miles per hour.
+
+                With a range of 500 miles, the vehicle would be able to takeoff and land vertically and could be used to
+                transport people or cargo. It would be powered by six propellers, including four that would fold into
+                the wings at cruise altitude to reduce noise.
+
+                Several other companies, including Uber, Airbus (EADSF) and a startup backed by Google (GOOGL) cofounder
+                Larry Page, are racing to commercialize flying taxis. Rolls-Royce said its vehicle could be available by
+                the early 2020s.
+
+                Rolls-Royce Motor Cars, a separate company owned by German car manufacturer BMW (BMWYY), is not involved
+                in the project.
+
+                rolls-royce taxi
+                A taxi version of the Rolls-Royce concept vehicle.
+                Rolls-Royce (RYCEF) is seeking partners to work on its vehicle, which would rely on batteries powered by
+                gas turbines. The first version would require a pilot, the company said, adding the vehicle could have
+                personal, commercial passenger, cargo and military applications.
+
+                "Electrification is an exciting and inescapable trend across industrial technology markets and while the
+                move to more electric propulsion will be gradual for us, it will ultimately be a revolution," said
+                Rolls-Royce executive Rob Watson.
+
+                Rolls-Royce may have an edge over the competition when it comes to vertical takeoff. It designed the
+                engines used on two military aircraft that can do that: The Harrier Jump Jet and the V-22 Osprey.
+
+            </p>
+
+
+        </section>
+
+        </section>
+        <h2> HEALTH</h2>
+        <section id="health">
+            <h3 id="header">Liver cancer death rate in US surged 43% in 16 years</h3>
+            <p><img src="http://i0.kym-cdn.com/photos/images/original/000/326/426/506.jpg" height="200" width="200"></p>
+            <p id="article">Death rates from liver cancer increased 43% for American adults from 2000 to 2016, according
+                to a report released Tuesday by the US Centers for Disease Control and Prevention's National Center for
+                Health Statistics. The increase comes even as mortality for all cancers combined has declined.
+
+                Liver cancer death rates increased for both men and women 25 and older, as well as white, black and
+                Hispanic people. Only Asians and Pacific Islanders saw a decrease in mortality from liver cancer.
+                HPV test more effective than Pap smear in cancer screening, study suggests
+                HPV test more effective than Pap smear in cancer screening, study suggests
+                The rise in mortality doesn't mean that liver cancer is deadlier than before, according to Dr. Jiaquan
+                Xu, the author of the report; the 10-year survival rate for liver cancer didn't change much. Rather, the
+                increase in mortality means more people are developing liver cancer.
+                More than 70% of liver cancers are caused by underlying liver disease, which has risk factors such as
+                obesity, smoking, excess alcohol consumption, and hepatitis B and C infection, said Dr. Farhad Islami,
+                the scientific director of cancer surveillance research at the American Cancer Society.
+                "I think the main reason for the increase in liver cancer incidence and death rate in the US is the
+                increase in the prevalence of excess body weight and hepatitis C virus infection in baby boomers," said
+                Islami, who authored a study on liver cancer occurrence between 1990 and 2014.
+                New hepatitis C infections triple due to opioid epidemic
+                New hepatitis C infections triple due to opioid epidemic
+                Up until 1992, blood transfusions and organ transplants were not screened for hepatitis C, Xu said.
+                According to the CDC, this was once a common means of hepatitis C transmission.
+            </p>
+
+        </section>
+
+
     </div>
+    <div id="validators">  <!-- You could keep inside the overallContent div -->
+        <a href="{{ url_for('index') }}"><img
+                src="https://cdn.arstechnica.net/wp-content/themes/arstechnica/assets/images/ars-logo-open-grey.png"
+                alt="Valid HTML5"/></a> <br/>
+    </div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/selectnav.min.js') }}"></script>
+    <script type="text/javascript">
+        selectnav('nav', {
+            label: '-Navigation-',
+            nested: true,
+            indent: '-'
+        });
+        selectnav('f_menu', {
+            label: '-Navigation-',
+            nested: true,
+            indent: '-'
+        });
+        $('.bxslider').bxSlider({
+            mode: 'fade',
+            captions: true
+        });
+
+
+    </script>
+
 </div>
-<div id="validators">  <!-- You could keep inside the overallContent div -->
-    <a href="{{ url_for('index') }}"><img
-            src="https://cdn.arstechnica.net/wp-content/themes/arstechnica/assets/images/ars-logo-open-grey.png"
-            alt="Valid HTML5"/></a> <br/>
-</div>
-<script type="text/javascript" src="{{ url_for('static', filename='js/selectnav.min.js') }}"></script>
-<script type="text/javascript">
-    selectnav('nav', {
-        label: '-Navigation-',
-        nested: true,
-        indent: '-'
-    });
-    selectnav('f_menu', {
-        label: '-Navigation-',
-        nested: true,
-        indent: '-'
-    });
-    $('.bxslider').bxSlider({
-        mode: 'fade',
-        captions: true
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
 </body>
 <style>
     #validators {
@@ -353,27 +219,5 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>
-
 </html>
